@@ -1,7 +1,7 @@
 ﻿/**
  * Represents a PDF document with various properties and methods for PDF operations.
  */
-import {FileInstance} from "./FileInstance";
+import {FileInstance} from "./Files";
 
 export interface PdfInstance {
     /**

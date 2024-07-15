@@ -1,4 +1,4 @@
-﻿import {FileInstance} from "./FileInstance";
+﻿import {FileInstance} from "./Files";
 import {Customer} from "./Customer";
 
 /**

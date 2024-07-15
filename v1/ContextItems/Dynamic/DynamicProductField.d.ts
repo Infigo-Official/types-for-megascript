@@ -2,7 +2,7 @@
  * Represents a dynamic product field with methods to retrieve and update its text,
  * and to get detailed information about the field.
  */
-interface DynamicProductField {
+export interface DynamicProductField {
     /**
      * Retrieves the text content of the field.
      * @returns {string} The current text of the field.
@@ -27,7 +27,7 @@ interface DynamicProductField {
 /**
  * Represents detailed information about a dynamic field.
  */
-type DynamicFieldModel = {
+export type DynamicFieldModel = {
     /**
      * The type of the field, defining its nature (e.g., text, image).
      * This can be one of the values defined in the DynamicFieldType enum.
@@ -38,7 +38,7 @@ type DynamicFieldModel = {
      * Custom data associated with the field.
      * This can be used to store additional metadata or settings specific to the field.
      */
-    CustomData: ICustomDataModel;
+    CustomData: CustomDataModel;
 
     /**
      * The name of the field, used to identify it.
@@ -55,7 +55,7 @@ type DynamicFieldModel = {
  * Represents custom data that can be associated with a dynamic field.
  * This typically includes additional metadata about the field.
  */
-interface ICustomDataModel {
+export interface CustomDataModel {
     /**
      * A string indicating the type of custom data.
      * This helps in categorizing or interpreting the custom data.

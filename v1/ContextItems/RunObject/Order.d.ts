@@ -1,4 +1,8 @@
 ﻿import {OrderProductVariant} from "./OrderProductVariant";
+import {PagedList, Result} from "../Shared/Shared";
+import {RecordOrderModel} from "./Record";
+import {Address} from "./Address";
+import {FileInstance} from "./Files";
 
 /**
  * Represents an order with various properties and methods for order operations.
@@ -154,14 +158,14 @@ export interface Order {
      * @param keyValues Optional key-values parameter for additional options.
      * Returns a FileInstanceObject representing the invoice.
      */
-    GetInvoice: (keyValues?: object) => FileInstanceObject;
+    GetInvoice: (keyValues?: object) => FileInstance;
 
     /**
      * Gets the packing slip for the order.
      * @param keyValues Optional key-values parameter for additional options.
      * Returns a FileInstanceObject representing the packing slip.
      */
-    GetPackingSlip: (keyValues?: object) => FileInstanceObject;
+    GetPackingSlip: (keyValues?: object) => FileInstance;
 
     /**
      * Updates the custom data for the order.
@@ -201,103 +205,214 @@ export interface Order {
 }
 
 /**
- * Represents an address object with detailed information.
+ * Represents operations related to orders.
  */
-export interface Address {
+export interface Orders {
     /**
-     * The unique identifier of the address.
+     * Finds an order by its ID.
+     * @param id The ID of the order to find.
+     * @returns The order matching the ID, or null if not found.
      */
-    Id?: number;
+    FindById: (id: number) =>Order | null;
 
     /**
-     * The first name associated with the address.
+     * Finds an order by the ID of its product variant.
+     * @param id The ID of the product variant associated with the order.
+     * @returns The order associated with the product variant ID, or null if not found.
      */
-    FirstName: string;
+    FindByOrderProductVariantId: (id: number) => Order | null;
 
     /**
-     * The last name associated with the address.
+     * Starts a search operation for orders.
+     * @returns An object allowing further specification of the search criteria.
      */
-    LastName: string;
+    StartSearch: () => OrderSearch;
 
     /**
-     * The full name combining first name and last name.
+     * Validates a record order model and returns a result.
+     * @param order The record order model to validate.
+     * @returns A result indicating success or failure of the validation.
      */
-    FullName: string;
+    ValidateRecordOrder: (order: RecordOrderModel) => Result;
 
     /**
-     * The company name associated with the address.
+     * Records an order based on the provided model and returns a result.
+     * @param order The record order model to be recorded.
+     * @returns A result indicating success or failure of the record operation.
      */
-    CompanyName: string;
+    RecordOrder: (order: RecordOrderModel) => Result;
 
     /**
-     * The first line of the address.
+     * Searches orders based on custom tags.
+     * @param tagType The type of custom tag to search by.
+     * @param phrase The search phrase or keyword.
+     * @param pageIndex The index of the page to retrieve (starting from 1).
+     * @param pageSize The number of items per page.
+     * @param exactMatch Indicates if the search should be an exact match.
+     * @param orderAscending Indicates the sorting direction (true for ascending, false for descending).
+     * @returns A paged list of orders matching the search criteria.
      */
-    AddressLine1: string;
+    SearchOrderByCustomTags: (
+        tagType: CustomTagType,
+        phrase: string,
+        pageIndex: number,
+        pageSize: number,
+        exactMatch: boolean,
+        orderAscending: boolean
+    ) => PagedList<Order>;
 
     /**
-     * The second line of the address (if applicable).
+     * Searches order product variants based on custom tags.
+     * @param tagType The type of custom tag to search by.
+     * @param phrase The search phrase or keyword.
+     * @param pageIndex The index of the page to retrieve (starting from 1).
+     * @param pageSize The number of items per page.
+     * @param exactMatch Indicates if the search should be an exact match.
+     * @param orderAscending Indicates the sorting direction (true for ascending, false for descending).
+     * @returns A paged list of order product variants matching the search criteria.
      */
-    AddressLine2: string;
-
-    /**
-     * The city or town name.
-     */
-    Town: string;
-
-    /**
-     * The ZIP or postal code.
-     */
-    ZipPostalCode: string;
-
-    /**
-     * The state or province name (nullable).
-     */
-    StateProvince: string | null;
-
-    /**
-     * The country name.
-     */
-    Country: string;
-
-    /**
-     * The telephone number associated with the address.
-     */
-    Telephone: string;
-
-    /**
-     * The fax number associated with the address.
-     */
-    FaxNumber: string;
-
-    /**
-     * The email address associated with the address.
-     */
-    Email: string;
-
-    /**
-     * Misconfiguration types associated with the address.
-     */
-    MisConfigurations: MisConfigType[];
+    SearchOrderProductVariantByCustomTags: (
+        tagType: CustomTagType,
+        phrase: string,
+        pageIndex: number,
+        pageSize: number,
+        exactMatch: boolean,
+        orderAscending: boolean
+    ) => PagedList<OrderProductVariant>;
 }
 
 /**
- * Represents a misconfiguration type with specific details.
+ * Represents a model for updating custom data.
  */
-export interface MisConfigType {
+export interface CustomDataUpdateModel {
+    CustomTag1?: string | null;
+    CustomTag2?: string | null;
+    CustomTag3?: string | null;
+    CustomTag4?: string | null;
+}
+
+/**
+ * Represents operations to search for orders.
+ */
+export interface OrderSearch {
     /**
-     * The unique identifier of the misconfiguration type.
+     * Filters orders by their status.
+     * @param status The order status to filter by.
+     * @returns The updated order search object.
      */
-    Id: number;
+    WithOrderStatus: (status: string) => OrderSearch;
 
     /**
-     * The plugin system name associated with the misconfiguration.
+     * Filters orders by their shipping status.
+     * @param status The shipping status to filter by.
+     * @returns The updated order search object.
      */
-    PluginSystemName: string;
+    WithShippingStatus: (status: string) => OrderSearch;
 
     /**
-     * The external identifier or reference for the misconfiguration.
+     * Filters orders by their payment status.
+     * @param status The payment status to filter by.
+     * @returns The updated order search object.
      */
-    ExternalId: string;
+    WithPaymentStatus: (status: string) => OrderSearch;
+
+    /**
+     * Filters orders for a specific customer ID.
+     * @param customerId The ID of the customer to filter orders for.
+     * @returns The updated order search object.
+     */
+    ForCustomer: (customerId: number) => OrderSearch;
+
+    /**
+     * Filters orders for a specific impersonator customer ID.
+     * @param customerId The ID of the impersonator customer to filter orders for.
+     * @returns The updated order search object.
+     */
+    ForImpersonator: (customerId: number) => OrderSearch;
+
+    /**
+     * Filters orders placed since a specific date.
+     * @param since The date since which orders should be filtered.
+     * @returns The updated order search object.
+     */
+    Since: (since: Date) => OrderSearch;
+
+    /**
+     * Filters orders placed until a specific date.
+     * @param until The date until which orders should be filtered.
+     * @returns The updated order search object.
+     */
+    Until: (until: Date) => OrderSearch;
+
+    /**
+     * Specifies what additional order data to load.
+     * @param property The type of additional data to load (e.g., shipping address, order line items).
+     * @returns The updated order search object.
+     */
+    LoadOrderData: (property: OrderLoadType) => OrderSearch;
+
+    /**
+     * Specifies the order in which orders should be returned.
+     * @param orderBy The criteria by which to order the orders.
+     * @returns The updated order search object.
+     */
+    OrderBy: (orderBy: OrderOrderBy) => OrderSearch;
+
+    /**
+     * Specifies the order in which orders should be returned (descending).
+     * @param orderBy The criteria by which to order the orders.
+     * @returns The updated order search object.
+     */
+    OrderByDescending: (orderBy: OrderOrderBy) => OrderSearch;
+
+    /**
+     * Retrieves all orders matching the search criteria.
+     * @param pageIndex The index of the page to retrieve (starting from 1).
+     * @param pageSize The number of orders per page.
+     * @returns A paged list of orders matching the search criteria.
+     */
+    FindAll: (pageIndex: number, pageSize: number) => PagedList<Order>;
+}
+
+/**
+ * Enum defining types of custom tags.
+ */
+export enum CustomTagType {
+    CustomTag1 = 1,
+    CustomTag2 = 2,
+    CustomTag3 = 3,
+    CustomTag4 = 4
+}
+
+/**
+ * Enum defining types of data to load for an order.
+ */
+export enum OrderLoadType {
+    All = ~0,
+    None = 0,
+    ShippingAddress = 1 << 1,
+    BillingAddress = 1 << 2,
+    CheckoutAttributes = 1 << 3,
+    Department = 1 << 4,
+    OrderLineItems = 1 << 5,
+    ExtraData = 1 << 6
+}
+
+/**
+ * Enum defining criteria for ordering orders.
+ */
+export enum OrderOrderBy {
+    Id = 0,
+    CreatedDate = 1,
+    Customer = 2
+}
+
+/**
+ * Enum defining direction for ordering orders.
+ */
+export enum OrderOrderDirection {
+    Asc,
+    Desc
 }
 
 /**

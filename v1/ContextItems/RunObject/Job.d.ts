@@ -23,9 +23,9 @@ export interface JobStatus{
     readonly CustomStatus: string | null;
 
     /**
-    * Sets information for the job status.
-    * @param info The information to set.
-    * Returns true if the operation was successful, false otherwise.
-    */
+     * Sets information for the job status.
+     * @param info The information to set.
+     * Returns true if the operation was successful, false otherwise.
+     */
     SetInfo: (info: string) => boolean;
 }

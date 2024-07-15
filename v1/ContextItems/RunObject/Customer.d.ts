@@ -1,4 +1,10 @@
-﻿/**
+﻿import {MisConfigType} from "./Mis";
+import {Result} from "../Shared/Shared";
+import {Product} from "./Product";
+import {ProductLoadType, ProductVariantLoadType} from "./ProductSearch";
+import {Address} from "./Address";
+
+/**
  * Represents a customer in the system.
  */
 export interface Customer {
@@ -120,7 +126,7 @@ export interface Customer {
     /**
      * Additional custom attributes associated with the customer.
      */
-    AdditionalAttributes: ICustomerAttributeType[];
+    AdditionalAttributes: CustomerAttributeType[];
 
     /**
      * The promotion card number associated with the customer.
@@ -269,9 +275,96 @@ export interface Customer {
 }
 
 /**
+ * Represents a collection of methods to manage customers.
+ */
+export interface Customers {
+    /**
+     * Finds a customer by their identifier.
+     *
+     * @param id - The identifier of the customer.
+     * @returns An object representing the customer.
+     */
+    FindById: (id: number) => Customer;
+
+    /**
+     * Finds a customer by their email address.
+     *
+     * @param email - The email address of the customer.
+     * @returns An object representing the customer.
+     */
+    FindByEmail: (email: string) => Customer;
+
+    /**
+     * Finds a customer by their username.
+     *
+     * @param username - The username of the customer.
+     * @returns An object representing the customer.
+     */
+    FindByUsername: (username: string) => Customer;
+
+    /**
+     * Finds a customer by their GUID.
+     *
+     * @param guid - The GUID of the customer.
+     * @returns An object representing the customer.
+     */
+    FindByGuid: (guid: string) => Customer;
+
+    /**
+     * Creates a new customer.
+     *
+     * @param customer - The customer object to create.
+     * @returns A result object indicating the outcome of the operation.
+     */
+    Create: (customer: Customer) => Result;
+
+    /**
+     * Updates an existing customer.
+     *
+     * @param customer - The customer object to update.
+     * @returns A result object indicating the outcome of the operation.
+     */
+    Update: (customer: Customer) => Result;
+
+    /**
+     * Finds customers by their external identifier.
+     *
+     * @param externalId - The external identifier of the customers.
+     * @returns An array of objects representing the customers.
+     */
+    FindByExternalId: (externalId: string) => Customer[];
+
+    /**
+     * Starts a search operation for customers.
+     *
+     * @returns An object representing the customer search operation.
+     */
+    StartSearch: () => CustomerSearch;
+
+    /**
+     * Updates the external identifier of a customer.
+     *
+     * @param customerId - The identifier of the customer.
+     * @param externalId - The new external identifier to set.
+     * @param pluginSystemName - The name of the plugin system.
+     * @returns A result object indicating the outcome of the operation.
+     */
+    UpdateExternalId: (customerId: number, externalId: string, pluginSystemName: string) => Result;
+
+    /**
+     * Retrieves the department associated with a customer.
+     *
+     * @param customerId - The identifier of the customer.
+     * @returns An object representing the department associated with the customer.
+     */
+    GetDepartment: (customerId: number) => Department;
+}
+
+
+/**
  * Represents a key-value pair attribute for a customer.
  */
-export interface ICustomerAttributeType {
+export interface CustomerAttributeType {
     /**
      * The key of the customer attribute.
      */
@@ -407,40 +500,6 @@ export interface CustomerSearch {
     GetAllDetailed: () => PagedList<Customer>;
 }
 
-/**
- * Represents an address.
- */
-export interface Address {
-    /**
-     * The first line of the address.
-     */
-    AddressLine1: string;
-
-    /**
-     * The second line of the address.
-     */
-    AddressLine2: string;
-
-    /**
-     * The city of the address.
-     */
-    City: string;
-
-    /**
-     * The ZIP or postal code of the address.
-     */
-    ZipPostalCode: string;
-
-    /**
-     * The state or province of the address.
-     */
-    StateProvince: string;
-
-    /**
-     * The country of the address.
-     */
-    Country: string;
-}
 
 /**
  * Represents a department.
@@ -455,13 +514,6 @@ export interface Department {
      * The name of the department.
      */
     Name: string;
-}
-
-/**
- * Represents a MIS (Management Information System) configuration type.
- */
-export interface MisConfigType {
-    // Define properties for MIS configuration type
 }
 
 /**
@@ -488,3 +540,40 @@ export interface PagedList<T> {
      */
     List: T[];
 }
+
+/**
+ * Represents the result of an access permission check for a product.
+ */
+export interface MsAccessPermissionCheckResult {
+    /**
+     * The product for which the permission is checked.
+     */
+    Product: Product;
+
+    /**
+     * Indicates whether the access is allowed for the product.
+     */
+    IsAllowed: boolean;
+
+    /**
+     * Provides the reason or explanation for the permission result.
+     */
+    Reason: string;
+}
+
+/**
+ * Represents the context for loading specific details of products
+ * when checking access permissions.
+ */
+export interface MSAccessPermissionLoadContext {
+    /**
+     * Specifies what product details to load.
+     */
+    ProductLoad: ProductLoadType;
+
+    /**
+     * Specifies what product variant details to load.
+     */
+    ProductVariant: ProductVariantLoadType;
+}
+

@@ -1,4 +1,21 @@
-﻿/**
+﻿import {FileObject} from "./Files";
+import {HotFolderObject} from "./HotFolder";
+import {DepartmentObject} from "./Department";
+import {CustomDataCategoryObjects} from "./CustomData";
+import {Customers} from "./Customer";
+import {MegascriptInstanceListObject} from "./Megascript";
+import {Links} from "./Link";
+import {ExternalApi} from "./ExternalApi";
+import {Products} from "./Product";
+import {Orders} from "./Order";
+import {Database} from "./Database";
+import {UploadLocation} from "./UploadLocation";
+import {CartManagement} from "./Cart";
+import {MessageHandlerObject} from "./Message";
+import {ParseObject} from "./ParseObject";
+import {CurrentContextObject} from "./Context";
+
+/**
  * Represents a run instance.
  */
 export interface Run {
@@ -40,7 +57,7 @@ export interface Run {
     /**
      * Products involved in the run.
      */
-    Products: Product;
+    Products: Products;
 
     /**
      * Orders related to the run.

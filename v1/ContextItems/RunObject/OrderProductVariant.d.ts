@@ -1,5 +1,7 @@
 ﻿import {Product, ProductDeliveryType} from "./Product";
-import {JobStatus} from "../../Common/JobStatus";
+import {JobStatus} from "./Job";
+import {JobMetaDataInstanceObject} from "./Context";
+import {FileInstance} from "./Files";
 
 /**
  * Interface representing an order product variant object.
@@ -220,14 +222,14 @@ export interface OrderProductVariant {
      * Retrieves the output file associated with the order product variant.
      * @returns The output file instance.
      */
-    GetOutputFile: () => FileInstanceObject;
+    GetOutputFile: () => FileInstance;
 
     /**
      * Sets the output file for the order product variant.
      * @param file The file instance to set.
      * @returns The upload result as an object instance.
      */
-    SetOutputFile: (file: FileInstanceObject) => OutputResult;
+    SetOutputFile: (file: FileInstance) => OutputResult;
 
     /**
      * Loads metadata associated with the order product variant.
@@ -241,34 +243,34 @@ export interface OrderProductVariant {
      * @param page The page number for preview.
      * @returns The preview file instance.
      */
-    GetPreviewFile: (page?: number) => FileInstanceObject;
+    GetPreviewFile: (page?: number) => FileInstance;
 
     /**
      * Retrieves the job ticket file associated with the order product variant.
      * @param keyValues The key values for retrieving the job ticket.
      * @returns The job ticket file instance.
      */
-    GetJobTicket: (keyValues?: any) => FileInstanceObject;
+    GetJobTicket: (keyValues?: any) => FileInstance;
 
     /**
      * Retrieves the packing slip file associated with the order product variant.
      * @param keyValues The key values for retrieving the packing slip.
      * @returns The packing slip file instance.
      */
-    GetPackingSlip: (keyValues?: any) => FileInstanceObject;
+    GetPackingSlip: (keyValues?: any) => FileInstance;
 
     /**
      * Retrieves the invoice file associated with the order product variant.
      * @param keyValues The key values for retrieving the invoice.
      * @returns The invoice file instance.
      */
-    GetInvoice: (keyValues?: any) => FileInstanceObject;
+    GetInvoice: (keyValues?: any) => FileInstance;
 
     /**
      * Creates a backup of the output associated with the order product variant.
      * @returns The backup file instance.
      */
-    CreateBackup: () => FileInstanceObject;
+    CreateBackup: () => FileInstance;
 
     /**
      * Checks if a backup exists for the order product variant.
@@ -285,7 +287,7 @@ export interface OrderProductVariant {
      * Retrieves the backup file associated with the order product variant.
      * @returns The backup file instance.
      */
-    GetBackup: () => FileInstanceObject;
+    GetBackup: () => FileInstance;
 
     /**
      * Sets the status of the order product variant.

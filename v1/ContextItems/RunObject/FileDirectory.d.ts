@@ -1,4 +1,4 @@
-﻿import {FileInstance} from "./FileInstance";
+﻿import {FileInstance} from "./Files";
 
 /**
  * Interface representing a directory in a file system.

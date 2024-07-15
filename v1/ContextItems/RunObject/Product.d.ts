@@ -1,4 +1,7 @@
 ﻿import {ProductVariant} from "./ProductVariant";
+import {Customer, MsAccessPermissionCheckResult, MSAccessPermissionLoadContext} from "./Customer";
+import {PagedList} from "../Shared/Shared";
+import {ProductFilterModel} from "./ProductSearch";
 
 /**
  * Represents a product interface.
@@ -176,6 +179,56 @@ export interface Product {
 }
 
 /**
+ * Represents a collection of product-related methods.
+ */
+export interface Products {
+    /**
+     * Finds a product by its identifier.
+     *
+     * @param id - The identifier of the product.
+     * @returns An object representing the product.
+     */
+    FindById: (id: number) => Product;
+
+    /**
+     * Finds products by their identifiers.
+     *
+     * @param ids - An array of product identifiers.
+     * @returns An array of objects representing the products.
+     */
+    FindByIds: (ids: number[]) => Product[];
+
+    /**
+     * Finds a product by its SKU.
+     *
+     * @param sku - The SKU of the product.
+     * @returns An object representing the product.
+     */
+    FindBySku: (sku: string) => Product;
+
+    /**
+     * Finds products by their external identifier.
+     *
+     * @param externalId - The external identifier of the products.
+     * @returns An array of objects representing the products.
+     */
+    FindByExternalId: (externalId: string) => Product[];
+
+    /**
+     * Searches for products based on text value filters.
+     *
+     * @param filter - The filter model containing search criteria.
+     * @returns A paged list of products that match the filter or null if no results.
+     */
+    FindByTextValue: (filter: ProductFilterModel) => PagedList<Product> | null;
+
+    /**
+     * Access permissions related to products.
+     */
+    AccessPermission: AccessPermission;
+}
+
+/**
  * Represents a product tag interface.
  */
 export interface ProductTag {
@@ -315,6 +368,22 @@ export interface ProductPicture {
     DisplayOrder: number;
 }
 
+/**
+ * Represents access permission functionality for checking permissions.
+ */
+export interface AccessPermission {
+    /**
+     * Checks if a customer has permission to access specific products.
+     *
+     * @param customer - The customer object to check permissions for.
+     * @param products - The array of products to check permissions against.
+     * @param includeReason - Indicates whether to include the reason for the permission check.
+     * @param loadContext - The context for loading access permissions.
+     * @returns An array of permission check results.
+     */
+    CheckPermission(customer: Customer, products: Product[], includeReason: boolean, loadContext: MSAccessPermissionLoadContext): MsAccessPermissionCheckResult[];
+}
+
 
 /**
  * Enum representing product delivery types.
@@ -322,4 +391,33 @@ export interface ProductPicture {
 export enum ProductDeliveryType {
     Digital = 'digital',
     Print = 'print'
+}
+
+/**
+ * Enum defining various types of products.
+ */
+export enum ProductType {
+    /** Placeholder product type. */
+    Nop,
+
+    /** Infigo product type. */
+    Infigo,
+
+    /** Multi-part product type. */
+    MultiPart,
+
+    /** Dynamic product type. */
+    Dynamic,
+
+    /** SMS product type. */
+    Sms,
+
+    /** Custom product type. */
+    Custom,
+
+    /** Symphony product type. */
+    Symphony,
+
+    /** PDF static product type. */
+    PdfStatic,
 }

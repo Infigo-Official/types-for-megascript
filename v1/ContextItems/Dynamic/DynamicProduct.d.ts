@@ -1,11 +1,12 @@
-﻿import {FileInstance} from "../RunObject/FileInstance";
-import {PdfInstance} from "../RunObject/PdfInstance";
+﻿import {FileInstance} from "../RunObject/Files";
+import {PdfInstance, Rectangle} from "../RunObject/PdfInstance";
+import {DynamicFieldModel, DynamicProductField} from "./DynamicProductField";
 
 /**
  * Represents a dynamic product interface with methods to interact with
  * and manipulate various aspects of a dynamic product.
  */
-interface DynamicProduct {
+export interface DynamicProduct {
     /**
      * Retrieves the text content of a specified field.
      * @param fieldName - The name of the field from which to retrieve the text.
@@ -72,7 +73,7 @@ interface DynamicProduct {
      * @param pageIndex - The index of the page to retrieve the size for.
      * @returns {IRectangle | null} An object representing the size of the page or null if the page index is invalid.
      */
-    GetPageSize(pageIndex: number): IRectangle | null;
+    GetPageSize(pageIndex: number): Rectangle | null;
 
     /**
      * Retrieves the names of all fields in the dynamic product.
