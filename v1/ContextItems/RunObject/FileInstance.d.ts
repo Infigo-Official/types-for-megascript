@@ -1,7 +1,10 @@
-﻿/**
+﻿import {PdfInstance} from "./PdfInstance";
+import {FileDirectory} from "./FileDirectory";
+
+/**
  * Represents a file instance with various properties and methods for file operations.
  */
-interface FileInstance {
+export interface FileInstance {
     /**
      * Gets the name of the file without the extension.
      * Example: If the file is 'document.txt', this returns 'document'.

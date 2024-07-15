@@ -1,4 +1,7 @@
-﻿/**
+﻿import {FileInstance} from "../RunObject/FileInstance";
+import {PdfInstance} from "../RunObject/PdfInstance";
+
+/**
  * Represents a dynamic product interface with methods to interact with
  * and manipulate various aspects of a dynamic product.
  */

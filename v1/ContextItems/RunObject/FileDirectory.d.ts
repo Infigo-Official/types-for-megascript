@@ -1,4 +1,6 @@
-﻿/**
+﻿import {FileInstance} from "./FileInstance";
+
+/**
  * Interface representing a directory in a file system.
  * Provides methods and properties to interact with the files and subdirectories.
  */
