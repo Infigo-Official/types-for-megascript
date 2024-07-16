@@ -2,7 +2,7 @@
  * Represents a product variant.
  */
 
-export interface ProductVariant {
+interface ProductVariant {
     /**
      * The identifier of the product variant.
      */
@@ -255,9 +255,15 @@ export interface ProductVariant {
 }
 
 /**
+ * Represents a product variant interface.
+ */
+
+declare const ProductVariant: ProductVariant;
+
+/**
  * Represents a tier price for a product variant.
  */
-export interface TierPrice {
+interface TierPrice {
     /**
      * The quantity threshold for the tier price.
      */
@@ -272,7 +278,7 @@ export interface TierPrice {
 /**
  * Represents a discount applicable to a product variant.
  */
-export interface ProductVariantDiscount {
+interface ProductVariantDiscount {
     /**
      * The identifier of the discount.
      */
@@ -287,7 +293,7 @@ export interface ProductVariantDiscount {
 /**
  * Represents an external identifier associated with a product or variant.
  */
-export interface ExternalId {
+interface ExternalId {
     /**
      * The external identifier.
      */
@@ -302,7 +308,7 @@ export interface ExternalId {
 /**
  * Represents an attribute of a product variant.
  */
-export interface ProductAttribute {
+interface ProductAttribute {
     /**
      * The identifier of the product attribute.
      */
@@ -357,7 +363,7 @@ export interface ProductAttribute {
 /**
  * Represents a value of a product attribute.
  */
-export interface ProductAttributeValue {
+interface ProductAttributeValue {
     /**
      * The name or value of the product attribute.
      */
@@ -415,23 +421,9 @@ export interface ProductAttributeValue {
 }
 
 /**
- * Represents a product type.
- */
-export enum ProductType {
-    Nop,
-    Infigo,
-    MultiPart,
-    Dynamic,
-    Sms,
-    Custom,
-    Symphony,
-    PdfStatic,
-}
-
-/**
  * Represents a product group.
  */
-export interface ProductGroup {
+interface ProductGroup {
     /**
      * The identifier of the product group.
      */
@@ -446,7 +438,7 @@ export interface ProductGroup {
 /**
  * Represents a price script for a product variant.
  */
-export interface PriceScript {
+interface PriceScript {
     /**
      * The identifier of the price script.
      */
@@ -461,66 +453,177 @@ export interface PriceScript {
 /**
  * Represents the method used to manage inventory for a product variant.
  */
-export enum ManageInventoryMethod {
+declare enum ManageInventoryMethod {
+    /**
+     * Inventory is not managed for the product variant.
+     * Stock levels are not tracked, and the product can always be purchased.
+     */
     DontManageStock = 0,
+
+    /**
+     * Inventory is managed for the product variant.
+     * Stock levels are tracked, and purchasing is restricted based on availability.
+     */
     ManageStock = 1,
+
+    /**
+     * Inventory is managed by product attributes.
+     * Stock levels are tracked for specific combinations of attributes (e.g., size, color).
+     */
     ManageStockByAttributes = 2,
 }
+
 
 /**
  * Represents the action taken when a product variant is low on stock.
  */
-export enum LowStockActivity {
+declare enum LowStockActivity {
+    /**
+     * No action is taken when the product variant is low on stock.
+     */
     Nothing = 0,
+
+    /**
+     * The buy button is disabled when the product variant is low on stock.
+     * Customers will not be able to purchase the product.
+     */
     DisableBuyButton = 1,
+
+    /**
+     * The product variant is unpublished when it is low on stock.
+     * The product will not be visible or available for purchase.
+     */
     Unpublish = 2,
 }
+
 
 /**
  * Represents the backorder mode for a product variant.
  */
-export enum BackorderMode {
+declare enum BackorderMode {
+    /**
+     * No backorders are allowed.
+     * The product cannot be ordered if the stock quantity is zero or less.
+     */
     NoBackorders = 0,
+
+    /**
+     * Backorders are allowed even if the stock quantity is below zero.
+     * Customers can order the product regardless of stock availability.
+     */
     AllowQtyBelow0 = 1,
+
+    /**
+     * Backorders are allowed even if the stock quantity is below zero,
+     * and customers will be notified about the backorder status.
+     */
     AllowQtyBelow0AndNotifyCustomer = 2,
 }
 
+
 /**
- * Represents the control type of a product attribute.
+ * Represents the control type of product attribute.
  */
-export enum AttributeControlType {
+declare enum AttributeControlType {
+    /**
+     * A dropdown list control type for selecting a single option from a list.
+     */
     DropdownList = 1,
+
+    /**
+     * A radio button list control type for selecting a single option from multiple choices.
+     */
     RadioList = 2,
+
+    /**
+     * A checkbox control type for selecting multiple options.
+     */
     Checkboxes = 3,
+
+    /**
+     * A single-line text box control type for entering a short text.
+     */
     TextBox = 4,
+
+    /**
+     * A multi-line text box control type for entering longer text.
+     */
     MultilineTextbox = 10,
+
+    /**
+     * A date picker control type for selecting a date.
+     */
     Datepicker = 20,
+
+    /**
+     * A file upload control type for uploading files.
+     */
     FileUpload = 30,
+
+    /**
+     * An informational control type for displaying static information.
+     */
     Info = 40,
+
+    /**
+     * A hidden control type for storing values that should not be displayed to the user.
+     */
     Hidden = 999,
 }
+
 
 /**
  * Represents the display location of a product attribute.
  */
-export enum AttributeDisplayLocation {
+declare enum AttributeDisplayLocation {
+    /**
+     * Indicates that the product attribute is not displayed.
+     */
     None,
+
+    /**
+     * Indicates that the product attribute is displayed on the product details page.
+     */
     ProductDetails,
+
+    /**
+     * Indicates that the product attribute is displayed in the post editor.
+     */
     PostEditor,
 }
+
 
 /**
  * Represents the adjustment type for a product attribute value.
  */
-export enum ProductAttributeValuePriceAdjustmentType {
+declare enum ProductAttributeValuePriceAdjustmentType {
+    /**
+     * Represents a percentage-based price adjustment.
+     * Example: Increasing the price by 10%.
+     */
     Percent,
+
+    /**
+     * Represents an absolute value-based price adjustment.
+     * Example: Increasing the price by $5.
+     */
     Absolute,
 }
 
+
 /**
- * Represents the delivery type for a product variant.
+ * Enum representing the different types of product delivery methods.
  */
-export enum ProductDeliveryType {
+declare enum ProductDeliveryType {
+    /**
+     * Represents a digital product delivery method.
+     * Example: E-books, digital downloads, online streaming.
+     */
     Digital = 'digital',
+
+    /**
+     * Represents a physical print product delivery method.
+     * Example: Printed books, physical magazines, printed photographs.
+     */
     Print = 'print',
 }

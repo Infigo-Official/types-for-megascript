@@ -1,12 +1,8 @@
-﻿import {FileInstance} from "../RunObject/Files";
-import {PdfInstance, Rectangle} from "../RunObject/PdfInstance";
-import {DynamicFieldModel, DynamicProductField} from "./DynamicProductField";
-
-/**
+﻿/**
  * Represents a dynamic product interface with methods to interact with
  * and manipulate various aspects of a dynamic product.
  */
-export interface DynamicProduct {
+interface DynamicProduct {
     /**
      * Retrieves the text content of a specified field.
      * @param fieldName - The name of the field from which to retrieve the text.
@@ -132,3 +128,10 @@ export interface DynamicProduct {
      */
     LoadFromFile(json: string): boolean;
 }
+
+
+/**
+ * The dynamic product interface
+ */
+declare const DynamicProduct: DynamicProduct;
+

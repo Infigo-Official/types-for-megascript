@@ -1,9 +1,7 @@
-﻿import {KeyValue, PagedList} from "../Shared/Shared";
-
-/**
+﻿/**
  * Represents custom data category objects with methods for managing custom data categories.
  */
-export interface CustomDataCategoryObjects {
+interface CustomDataCategoryObjects {
     /**
      * Retrieves categories optionally filtered by name pattern.
      *
@@ -67,27 +65,72 @@ export interface CustomDataCategoryObjects {
      * @param filter - Object containing search filters.
      * @param callback - Callback function that receives the paged list of key-value pairs.
      */
-    SearchPaged: (filter: ICustomDataSearchObject, callback: (data: PagedList<KeyValue<string, object>>) => void) => void;
+    SearchPaged: (filter: CustomDataSearchObject, callback: (data: PagedList<KeyValue<string, object>>) => void) => void;
 }
+
+
+/**
+ * This is CustomDataCategory object.
+ */
+declare const CustomDataCategoryObjects: CustomDataCategoryObjects;
 
 /**
  * Represents search criteria for custom data items.
  */
-export interface ICustomDataSearchObject {
+interface CustomDataSearchObject {
+    /**
+     * The index of the page to retrieve.
+     */
     PageIndex: number;
+
+    /**
+     * The number of items per page to retrieve.
+     */
     PerPage: number;
+
+    /**
+     * Indicates whether to perform an exact match search.
+     */
     ExactMatch: boolean;
+
+    /**
+     * The key or field to search within custom data items.
+     */
     Key: string;
+
+    /**
+     * Specifies the category of custom data to search within. Can be either a category ID (number) or a detailed CustomDataCategoryObject.
+     */
     CustomDataCategory: number | CustomDataCategoryObject;
+
+    /**
+     * The query string to search for within the specified key or field.
+     */
     Query: string;
 }
 
 /**
  * Represents a custom data category object.
  */
-export interface CustomDataCategoryObject {
+interface CustomDataCategoryObject {
+    /**
+     * The unique identifier of the custom data category.
+     */
     id: number;
+
+    /**
+     * The name or title of the custom data category.
+     */
     name: string;
+
+    /**
+     * The count or number of items in this custom data category.
+     */
     count: number;
+
+    /**
+     * Example data associated with this custom data category.
+     * This is represented as a dictionary where keys are strings and values are objects.
+     */
     exampleData: { [key: string]: object };
 }

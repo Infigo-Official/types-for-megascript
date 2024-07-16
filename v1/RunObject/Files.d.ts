@@ -153,7 +153,7 @@ export interface FileInstance {
  * Enum representing different types of metadata that can be loaded.
  * Each value is a bit flag, allowing for bitwise combinations to load multiple types.
  */
-export enum MetaDataToLoad {
+declare enum MetaDataToLoad {
     /**
      * Base flag for job-related metadata.
      * This flag is the foundation for most other metadata types.

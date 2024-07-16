@@ -1,11 +1,7 @@
-﻿import {Customer} from "./Customer";
-import {Product, ProductType} from "./Product";
-import {MsBaseModel, MsModel} from "../Shared/Shared";
-
-/**
+﻿/**
  * Represents operations for managing shopping carts.
  */
-export interface CartManagement {
+interface CartManagement {
     /**
      * Adds an item to the shopping basket.
      * @param sci The object instance representing the item to add.
@@ -53,9 +49,15 @@ export interface CartManagement {
 }
 
 /**
+ * The cart management object provides operations for managing shopping carts.
+ */
+
+declare const CartManagement: CartManagement;
+
+/**
  * Represents an item in the shopping cart.
  */
-export interface ShoppingCartItemObject {
+interface ShoppingCartItemObject {
     /** The ID of the shopping cart item. */
     readonly Id: number;
 
@@ -95,9 +97,15 @@ export interface ShoppingCartItemObject {
 }
 
 /**
+ * Represents a shopping cart item object.
+ */
+
+declare const ShoppingCartItemObject: ShoppingCartItemObject;
+
+/**
  * Represents the count of items in a shopping cart.
  */
-export interface ShoppingCartItemCount {
+interface ShoppingCartItemCount {
     /** The total count of items in the shopping cart. */
     ItemsCount: number;
 
@@ -108,13 +116,14 @@ export interface ShoppingCartItemCount {
 /**
  * Represents a linked job object associated with a shopping cart item.
  */
-export interface LinkedJobObject {
+interface LinkedJobObject {
     /** The unique identifier of the linked job. */
     Id: number;
 
     /** The type of product associated with the linked job. */
     Type: ProductType;
 }
+
 
 /**
  * Represents a group object with its properties.
@@ -153,7 +162,7 @@ export interface AddToBasketObjectInstance {
 /**
  * Enum defining the type of basket items.
  */
-export enum MsShoppingCartItemType {
+declare enum MsShoppingCartItemType {
     /** Shopping cart item type. */
     ShoppingCart = 1,
 

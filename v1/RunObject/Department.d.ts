@@ -1,9 +1,7 @@
-﻿import {MisConfigType} from "./Mis";
-
-/**
+﻿/**
  * Represents a department object interface with methods to manage departments.
  */
-export interface DepartmentObject {
+interface DepartmentObject {
     /**
      * Finds a department by its identifier.
      *
@@ -30,11 +28,16 @@ export interface DepartmentObject {
     GetMisConfiguration: (departmentId: number, pluginSystemName: string) => MisConfigType;
 }
 
+/**
+ * Represents a department object with methods to manage departments.
+ */
+declare const DepartmentObject: DepartmentObject;
+
 
 /**
  * Represents a department with its properties.
  */
-export interface Department {
+interface Department {
     /**
      * The identifier of the department.
      */

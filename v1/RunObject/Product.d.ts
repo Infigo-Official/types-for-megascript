@@ -388,15 +388,24 @@ export interface AccessPermission {
 /**
  * Enum representing product delivery types.
  */
-export enum ProductDeliveryType {
+declare enum ProductDeliveryType {
+    /**
+     * Represents products that are delivered digitally.
+     * Example: Software downloads, digital subscriptions.
+     */
     Digital = 'digital',
+
+    /**
+     * Represents products that are delivered physically in printed form.
+     * Example: Books, magazines, posters.
+     */
     Print = 'print'
 }
 
 /**
  * Enum defining various types of products.
  */
-export enum ProductType {
+declare enum ProductType {
     /** Placeholder product type. */
     Nop,
 

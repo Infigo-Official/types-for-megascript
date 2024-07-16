@@ -1,13 +1,13 @@
-﻿import {MisConfigType} from "./Mis";
-import {Result} from "../Shared/Shared";
-import {Product} from "./Product";
-import {ProductLoadType, ProductVariantLoadType} from "./ProductSearch";
-import {Address} from "./Address";
+﻿/**
+ * This defines the common base field interface shared among all types.
+ *
+ * @module Customer / Base Field
+ */
 
 /**
  * Represents a customer in the system.
  */
-export interface Customer {
+interface Customer {
     /**
      * The unique identifier of the customer.
      */
@@ -275,9 +275,15 @@ export interface Customer {
 }
 
 /**
+ * Represents a customer interface.
+ */
+
+declare const Customer: Customer;
+
+/**
  * Represents a collection of methods to manage customers.
  */
-export interface Customers {
+interface Customers {
     /**
      * Finds a customer by their identifier.
      *
@@ -360,11 +366,17 @@ export interface Customers {
     GetDepartment: (customerId: number) => Department;
 }
 
+/**
+ * Represents a customers interface.
+ */
+
+declare const Customers: Customers;
+
 
 /**
  * Represents a key-value pair attribute for a customer.
  */
-export interface CustomerAttributeType {
+interface CustomerAttributeType {
     /**
      * The key of the customer attribute.
      */
@@ -379,7 +391,7 @@ export interface CustomerAttributeType {
 /**
  * Represents search parameters for customer searches.
  */
-export enum SearchParam {
+declare enum SearchParam {
     /**
      * Search parameter for exact match.
      */
@@ -394,7 +406,7 @@ export enum SearchParam {
 /**
  * Represents a search context for customers.
  */
-export interface CustomerSearch {
+interface CustomerSearch {
     /**
      * Loads all customers in the search context.
      */
@@ -504,7 +516,7 @@ export interface CustomerSearch {
 /**
  * Represents a department.
  */
-export interface Department {
+interface Department {
     /**
      * The identifier of the department.
      */

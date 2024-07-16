@@ -144,11 +144,29 @@ export interface CustomTagsModel {
 /**
  * Enum representing delivery types for an order.
  */
-export enum DeliveryTypeModel {
+declare enum DeliveryTypeModel {
+    /**
+     * Default delivery type.
+     */
     DefaultDelivery = 0,
-    Print = 1 << 0,     // Binary: 0001 (1 in decimal)
-    Digital = 1 << 1,   // Binary: 0010 (2 in decimal)
-    PrintAndDigital = Print | Digital // Binary: 0011 (3 in decimal)
+
+    /**
+     * Print delivery type.
+     * Binary: 0001 (1 in decimal)
+     */
+    Print = 1 << 0,  // 1 in decimal
+
+    /**
+     * Digital delivery type.
+     * Binary: 0010 (2 in decimal)
+     */
+    Digital = 1 << 1,  // 2 in decimal
+
+    /**
+     * Both print and digital delivery types.
+     * Binary: 0011 (3 in decimal)
+     */
+    PrintAndDigital = Print | Digital  // 3 in decimal
 }
 
 /**

@@ -2,7 +2,7 @@
 /**
  * Represents a misconfiguration type with specific details.
  */
-export interface MisConfigType {
+ interface MisConfigType {
     /**
      * The unique identifier of the misconfiguration type.
      */
@@ -18,3 +18,9 @@ export interface MisConfigType {
      */
     ExternalId: string;
 }
+
+/**
+ * Represents a misconfiguration interface.
+ */
+
+declare const MisConfigType: MisConfigType;

@@ -1,10 +1,7 @@
-﻿import {FileInstance, FileObject} from "./Files";
-import {OrderProductVariant} from "./OrderProductVariant";
-
-/**
+﻿/**
  * Represents the current context object with various properties and methods.
  */
-export interface CurrentContextObject {
+interface CurrentContextObject {
     /**
      * The output mode for the current context.
      */
@@ -71,6 +68,12 @@ export interface CurrentContextObject {
 }
 
 /**
+ * Represents current context object description.
+ */
+
+declare const CurrentContextObject: CurrentContextObject;
+
+/**
  * Represents an output file extending a file object.
  */
 export interface OutputFile extends FileObject {
@@ -94,7 +97,7 @@ export interface JobMetaDataInstanceObject {
 /**
  * Represents an extended data item object including order product variant details.
  */
-export interface DataItemObject extends OrderProductVariant {
+interface DataItemObject extends OrderProductVariant {
     /**
      * The full ID of the data item.
      */
@@ -139,7 +142,7 @@ export interface DataItemObject extends OrderProductVariant {
 /**
  * Represents an event object with specific properties.
  */
-export interface EventObject {
+interface EventObject {
     /**
      * The name or identifier of the event.
      */

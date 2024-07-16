@@ -1,9 +1,7 @@
-﻿import {MisConfigType} from "./Mis";
-
-/**
+﻿/**
  * Represents an address with its properties.
  */
-export interface Address {
+interface Address {
     /**
      * Optional ID for the address.
      */
@@ -79,3 +77,9 @@ export interface Address {
      */
     MisConfigurations: MisConfigType[];
 }
+
+/**
+ * Represents an address with its properties.
+ */
+
+declare const Address: Address;

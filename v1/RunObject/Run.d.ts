@@ -133,7 +133,7 @@ export interface Run {
 /**
  * Enum representing various flags for MegaScript instances.
  */
-export enum MegascriptInstanceFlag {
+declare enum MegascriptInstanceFlag {
     RunBackground = 'RunBackground',
     PurgeManually = 'PurgeManually',
     TriggerViaApi = 'TriggerViaApi',

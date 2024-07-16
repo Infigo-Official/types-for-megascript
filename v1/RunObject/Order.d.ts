@@ -1,13 +1,7 @@
-﻿import {OrderProductVariant} from "./OrderProductVariant";
-import {PagedList, Result} from "../Shared/Shared";
-import {RecordOrderModel} from "./Record";
-import {Address} from "./Address";
-import {FileInstance} from "./Files";
-
-/**
+﻿/**
  * Represents an order with various properties and methods for order operations.
  */
-export interface Order {
+interface Order {
     /**
      * Gets or sets the ID of the order.
      */
@@ -205,9 +199,14 @@ export interface Order {
 }
 
 /**
+ * Represents order interface.
+ */
+declare const Order: Order;
+
+/**
  * Represents operations related to orders.
  */
-export interface Orders {
+interface Orders {
     /**
      * Finds an order by its ID.
      * @param id The ID of the order to find.
@@ -282,19 +281,14 @@ export interface Orders {
 }
 
 /**
- * Represents a model for updating custom data.
+ * The orders object provides operations for managing orders.
  */
-export interface CustomDataUpdateModel {
-    CustomTag1?: string | null;
-    CustomTag2?: string | null;
-    CustomTag3?: string | null;
-    CustomTag4?: string | null;
-}
+declare const Orders: Orders;
 
 /**
  * Represents operations to search for orders.
  */
-export interface OrderSearch {
+interface OrderSearch {
     /**
      * Filters orders by their status.
      * @param status The order status to filter by.
@@ -377,41 +371,113 @@ export interface OrderSearch {
 /**
  * Enum defining types of custom tags.
  */
-export enum CustomTagType {
+declare enum CustomTagType {
+    /**
+     * Represents Custom Tag 1.
+     */
     CustomTag1 = 1,
+
+    /**
+     * Represents Custom Tag 2.
+     */
     CustomTag2 = 2,
+
+    /**
+     * Represents Custom Tag 3.
+     */
     CustomTag3 = 3,
+
+    /**
+     * Represents Custom Tag 4.
+     */
     CustomTag4 = 4
 }
 
 /**
  * Enum defining types of data to load for an order.
  */
-export enum OrderLoadType {
+declare enum OrderLoadType {
+    /**
+     * Load all available data for the order.
+     * Binary: all bits set to 1 (~0 in binary)
+     */
     All = ~0,
+
+    /**
+     * Load no data for the order.
+     * Binary: 00000000 (0 in decimal)
+     */
     None = 0,
-    ShippingAddress = 1 << 1,
-    BillingAddress = 1 << 2,
-    CheckoutAttributes = 1 << 3,
-    Department = 1 << 4,
-    OrderLineItems = 1 << 5,
-    ExtraData = 1 << 6
+
+    /**
+     * Load shipping address data for the order.
+     * Binary: 00000010 (2 in decimal)
+     */
+    ShippingAddress = 1 << 1,  // 2 in decimal
+
+    /**
+     * Load billing address data for the order.
+     * Binary: 00000100 (4 in decimal)
+     */
+    BillingAddress = 1 << 2,  // 4 in decimal
+
+    /**
+     * Load checkout attributes data for the order.
+     * Binary: 00001000 (8 in decimal)
+     */
+    CheckoutAttributes = 1 << 3,  // 8 in decimal
+
+    /**
+     * Load department data associated with the order.
+     * Binary: 00010000 (16 in decimal)
+     */
+    Department = 1 << 4,  // 16 in decimal
+
+    /**
+     * Load order line items data for the order.
+     * Binary: 00100000 (32 in decimal)
+     */
+    OrderLineItems = 1 << 5,  // 32 in decimal
+
+    /**
+     * Load extra data associated with the order.
+     * Binary: 01000000 (64 in decimal)
+     */
+    ExtraData = 1 << 6,  // 64 in decimal
 }
 
 /**
  * Enum defining criteria for ordering orders.
  */
-export enum OrderOrderBy {
+declare enum OrderOrderBy {
+    /**
+     * Order orders by their unique identifier (ID).
+     */
     Id = 0,
+
+    /**
+     * Order orders by their creation date.
+     */
     CreatedDate = 1,
+
+    /**
+     * Order orders by the customer associated with the order.
+     */
     Customer = 2
 }
 
 /**
  * Enum defining direction for ordering orders.
  */
-export enum OrderOrderDirection {
+declare enum OrderOrderDirection {
+    /**
+     * Sort orders in ascending order (oldest to newest or alphabetically A to Z).
+     */
     Asc,
+
+    /**
+     * Sort orders in descending order (newest to oldest or alphabetically Z to A).
+     */
     Desc
 }
 

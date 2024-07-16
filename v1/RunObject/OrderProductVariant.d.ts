@@ -1,13 +1,8 @@
-﻿import {Product, ProductDeliveryType} from "./Product";
-import {JobStatus} from "./Job";
-import {JobMetaDataInstanceObject} from "./Context";
-import {FileInstance} from "./Files";
-
-/**
+﻿/**
  * Interface representing an order product variant object.
  * Provides properties and methods to manage details and actions related to an order product variant.
  */
-export interface OrderProductVariant {
+interface OrderProductVariant {
     /**
      * Job processing folder path.
      */
@@ -369,9 +364,15 @@ export interface OrderProductVariant {
 }
 
 /**
+ * Represents order product variant object.
+ */
+
+declare const OrderProductVariant: OrderProductVariant;
+
+/**
  * Represents the result of an upload operation.
  */
-export interface OutputResult {
+interface OutputResult {
     /**
      * Indicates whether the upload was successful.
      */
