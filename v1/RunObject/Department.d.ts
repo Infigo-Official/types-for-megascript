@@ -68,3 +68,9 @@ interface Department {
      */
     Email: string;
 }
+
+/**
+ * Represents a Department interface.
+ */
+
+declare const Department: Department;

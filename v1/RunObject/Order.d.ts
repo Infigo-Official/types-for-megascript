@@ -484,7 +484,7 @@ declare enum OrderOrderDirection {
 /**
  * Represents a model for updating custom data with optional tags.
  */
-export interface CustomDataUpdateModel {
+interface CustomDataUpdateModel {
     /**
      * The value of Custom Tag 1.
      */

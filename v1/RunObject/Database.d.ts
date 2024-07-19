@@ -1,7 +1,7 @@
 ﻿/**
  * Represents a database with basic CRUD operations.
  */
-export interface Database {
+interface Database {
     /**
      * Name of the application using the database.
      */
@@ -45,7 +45,7 @@ export interface Database {
 /**
  * Represents an entry in the database with a key-value pair.
  */
-export interface DataBaseEntry {
+interface DataBaseEntry {
     /**
      * The key of the database entry.
      */

@@ -609,21 +609,3 @@ declare enum ProductAttributeValuePriceAdjustmentType {
      */
     Absolute,
 }
-
-
-/**
- * Enum representing the different types of product delivery methods.
- */
-declare enum ProductDeliveryType {
-    /**
-     * Represents a digital product delivery method.
-     * Example: E-books, digital downloads, online streaming.
-     */
-    Digital = 'digital',
-
-    /**
-     * Represents a physical print product delivery method.
-     * Example: Printed books, physical magazines, printed photographs.
-     */
-    Print = 'print',
-}

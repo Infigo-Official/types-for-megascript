@@ -1,7 +1,7 @@
 ﻿/**
  * Represents a Megascript instance with its properties.
  */
-export interface MegascriptInstance {
+interface MegascriptInstance {
     /**
      * The name of the Megascript instance.
      */
@@ -44,9 +44,14 @@ export interface MegascriptInstance {
 }
 
 /**
+ * Represents a Megascript instance with its properties.
+ */
+declare const MegascriptInstance: MegascriptInstance;
+
+/**
  * Represents a container object for a single Megascript instance.
  */
-export interface MegascriptInstanceListObject {
+interface MegascriptInstanceListObject {
     /**
      * The current Megascript instance.
      */

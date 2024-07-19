@@ -1,7 +1,7 @@
 ﻿/**
  * Represents an object for parsing XML and extracting JSON.
  */
-export interface ParseObject {
+interface ParseObject {
     /**
      * Parses XML string into an object.
      * @param xml The XML string to parse.
@@ -27,7 +27,7 @@ export interface ParseObject {
 /**
  * Represents an object for extracting JSON tokens.
  */
-export interface JsonExtractorObject {
+interface JsonExtractorObject {
     /**
      * Selects a JSON token based on the specified path.
      * @param path The path to select the token.

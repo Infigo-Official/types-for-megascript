@@ -1,9 +1,7 @@
-﻿import {FileInstance} from "./Files";
-
-/**
+﻿/**
  * Represents an object for handling messages and templates.
  */
-export interface MessageHandlerObject {
+interface MessageHandlerObject {
     /**
      * Sends a message using the provided message context object.
      * @param message The message context object containing message details.
@@ -46,7 +44,7 @@ export interface MessageHandlerObject {
 /**
  * Represents a message context object used for configuring and sending messages.
  */
-export interface MessageContextObject {
+interface MessageContextObject {
     /**
      * Adds tokens to the message context object.
      * @param obj The tokens to add.
@@ -137,8 +135,8 @@ export interface MessageContextObject {
 
 /**
  * Builder object for managing message tokens.
- */
-export interface MessageTokenBuilderObject {
+ */ 
+interface MessageTokenBuilderObject {
     /**
      * Adds an order ID token.
      * @param orderId The ID of the order to add as a token.
@@ -205,7 +203,7 @@ export interface MessageTokenBuilderObject {
 /**
  * Represents a recipient for messaging.
  */
-export interface Recipient {
+interface Recipient {
     /**
      * The name of the recipient.
      */

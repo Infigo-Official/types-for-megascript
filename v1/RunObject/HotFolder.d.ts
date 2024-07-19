@@ -1,9 +1,7 @@
-﻿import {FileDirectory} from "./FileDirectory";
-
-/**
+﻿/**
  * Represents a hot folder object interface with methods to manage hot folders.
  */
-export interface HotFolderObject {
+interface HotFolderObject {
     /**
      * Retrieves the hot folder by its identifier.
      *
@@ -12,3 +10,8 @@ export interface HotFolderObject {
      */
     GetHotFolderById: (id: number) => FileDirectory | null;
 }
+
+/**
+ * Represents a hot folder object with methods to manage hot folders.
+ */
+declare const HotFolderObject: HotFolderObject;

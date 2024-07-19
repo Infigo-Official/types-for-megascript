@@ -1,7 +1,7 @@
 ﻿/**
  * Represents a model used to filter products.
  */
-export interface ProductFilterModel {
+interface ProductFilterModel {
     /**
      * The search query string.
      */

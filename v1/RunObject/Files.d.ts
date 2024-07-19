@@ -1,11 +1,7 @@
-﻿import {PdfInstance} from "./PdfInstance";
-import {FileDirectory} from "./FileDirectory";
-import {JobMetaDataInstanceObject} from "./Context";
-
-/**
+﻿/**
  * Represents a file instance with various properties and methods for file operations.
  */
-export interface FileInstance {
+ interface FileInstance {
     /**
      * Gets the name of the file without the extension.
      * Example: If the file is 'document.txt', this returns 'document'.
@@ -150,6 +146,12 @@ export interface FileInstance {
 }
 
 /**
+ * Represents a file directory with various properties and methods for directory operations.
+ */
+
+declare const FileDirectory: FileDirectory;
+
+/**
  * Enum representing different types of metadata that can be loaded.
  * Each value is a bit flag, allowing for bitwise combinations to load multiple types.
  */
@@ -253,7 +255,7 @@ declare enum MetaDataToLoad {
 /**
  * Represents a file object interface with methods for file manipulation.
  */
-export interface FileObject {
+interface FileObject {
     /**
      * Creates a temporary folder and returns its directory information.
      *
@@ -261,4 +263,3 @@ export interface FileObject {
      */
     CreateTemporaryFolder: () => FileDirectory;
 }
-

@@ -76,13 +76,13 @@ declare const CurrentContextObject: CurrentContextObject;
 /**
  * Represents an output file extending a file object.
  */
-export interface OutputFile extends FileObject {
+interface OutputFile extends FileObject {
 }
 
 /**
  * Represents metadata for a job instance object.
  */
-export interface JobMetaDataInstanceObject {
+interface JobMetaDataInstanceObject {
     /**
      * Indicates if the job metadata is loaded.
      */

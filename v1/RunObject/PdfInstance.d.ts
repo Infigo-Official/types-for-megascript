@@ -1,9 +1,8 @@
 ﻿/**
  * Represents a PDF document with various properties and methods for PDF operations.
  */
-import {FileInstance} from "./Files";
 
-export interface PdfInstance {
+interface PdfInstance {
     /**
      * Opens the PDF file with an optional password.
      * @param file The path to the PDF file.
@@ -287,7 +286,7 @@ export interface PdfInstance {
 /**
  * Represents a page in a PDF document with various properties and methods.
  */
-export interface PdfPage {
+interface PdfPage {
     /**
      * Draws a dynamic template on the page.
      * @param templateXml The XML string representing the dynamic template.
@@ -472,7 +471,7 @@ export interface PdfPage {
 /**
  * Represents a PDF layer object.
  */
-export interface PdfLayer{
+interface PdfLayer{
     /**
      * Gets the name of the PDF layer.
      */
@@ -493,7 +492,7 @@ export interface PdfLayer{
 /**
  * Represents a PdfImageObject with methods and properties for PDF image operations.
  */
-export interface PdfImage {
+interface PdfImage {
     /**
      * Saves the PdfImageObject to a file.
      * @param file The FileInstance object representing the file to save.
@@ -544,7 +543,7 @@ export interface PdfImage {
 /**
  * Represents a rectangle with properties for X, Y, Width, and Height.
  */
-export interface Rectangle {
+interface Rectangle {
     X: number;
     Y: number;
     Width: number;
@@ -554,7 +553,7 @@ export interface Rectangle {
 /**
  * Represents a PdfLayerObject with properties and methods for PDF layer operations.
  */
-export interface PdfLayer {
+interface PdfLayer {
     /**
      * Gets the name of the PdfLayerObject.
      */
@@ -574,7 +573,7 @@ export interface PdfLayer {
 /**
  * Represents metadata associated with a PDF document.
  */
-export interface IPdfMetaData {
+interface IPdfMetaData {
     /**
      * Gets or sets custom values associated with the PDF document.
      */

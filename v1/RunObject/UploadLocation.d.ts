@@ -1,9 +1,7 @@
-﻿import {FileDirectory} from "./FileDirectory";
-
-/**
+﻿/**
  * Represents operations related to upload locations.
  */
-export interface UploadLocation {
+interface UploadLocation {
     /**
      * Retrieves an upload location by its ID.
      * @param id The ID of the upload location to retrieve.

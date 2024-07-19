@@ -1,9 +1,7 @@
-﻿import {Address} from "./Address";
-
-/**
+﻿/**
  * Represents a model for recording an order.
  */
-export interface RecordOrderModel {
+interface RecordOrderModel {
     /**
      * External order ID associated with the order.
      */
@@ -68,7 +66,7 @@ export interface RecordOrderModel {
 /**
  * Represents a line item in an order with its properties.
  */
-export interface MSOrderLineItemModel {
+interface MSOrderLineItemModel {
     /**
      * ID of the product in the NopCommerce system.
      */
@@ -134,7 +132,7 @@ export interface MSOrderLineItemModel {
 /**
  * Represents custom tags associated with a model.
  */
-export interface CustomTagsModel {
+interface CustomTagsModel {
     CustomTag1: string;
     CustomTag2: string;
     CustomTag3: string;
@@ -172,7 +170,7 @@ declare enum DeliveryTypeModel {
 /**
  * Represents a key-value pair used in recording order data.
  */
-export interface RecordOrderKeyValue {
+interface RecordOrderKeyValue {
     /**
      * Key of the key-value pair, typically a string.
      */

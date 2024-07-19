@@ -1,10 +1,7 @@
-﻿import {FileInstance} from "./Files";
-import {Customer} from "./Customer";
-
-/**
+﻿/**
  * Represents a request object.
  */
-export interface Request {
+ interface Request {
     /**
      * The HTTP method of the request.
      */
@@ -24,7 +21,7 @@ export interface Request {
      * Headers of the request.
      */
     Headers: Object;
-
+0
     /**
      * Body content of the request.
      */

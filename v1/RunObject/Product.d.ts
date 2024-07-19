@@ -1,12 +1,7 @@
-﻿import {ProductVariant} from "./ProductVariant";
-import {Customer, MsAccessPermissionCheckResult, MSAccessPermissionLoadContext} from "./Customer";
-import {PagedList} from "../Shared/Shared";
-import {ProductFilterModel} from "./ProductSearch";
-
-/**
+﻿/**
  * Represents a product interface.
  */
-export interface Product {
+interface Product {
     /**
      * ID of the product.
      */
@@ -179,9 +174,15 @@ export interface Product {
 }
 
 /**
+ * Represents a product interface.
+ */
+
+declare const Product: Product;
+
+/**
  * Represents a collection of product-related methods.
  */
-export interface Products {
+interface Products {
     /**
      * Finds a product by its identifier.
      *
@@ -231,7 +232,7 @@ export interface Products {
 /**
  * Represents a product tag interface.
  */
-export interface ProductTag {
+interface ProductTag {
     /**
      * Name of the product tag.
      */
@@ -241,7 +242,7 @@ export interface ProductTag {
 /**
  * Represents a product category interface.
  */
-export interface ProductCategory {
+interface ProductCategory {
     /**
      * Id of the product category.
      */
@@ -266,7 +267,7 @@ export interface ProductCategory {
 /**
  * Represents a related product interface.
  */
-export interface RelatedProduct {
+interface RelatedProduct {
     /**
      * Id of the related product.
      */
@@ -286,7 +287,7 @@ export interface RelatedProduct {
 /**
  * Represents a product cross-sells interface.
  */
-export interface ProductCrossSells {
+interface ProductCrossSells {
     /**
      * Id of the cross-sell product.
      */
@@ -301,7 +302,7 @@ export interface ProductCrossSells {
 /**
  * Represents product specification attributes.
  */
-export interface ProductSpecificationAttributes {
+interface ProductSpecificationAttributes {
     /**
      * Name of the specification attribute.
      */
@@ -331,7 +332,7 @@ export interface ProductSpecificationAttributes {
 /**
  * Represents a print location for products.
  */
-export interface PrintLocation {
+interface PrintLocation {
     /**
      * The name of the print location.
      */
@@ -346,7 +347,7 @@ export interface PrintLocation {
 /**
  * Represents a picture associated with a product.
  */
-export interface ProductPicture {
+interface ProductPicture {
     /**
      * The identifier of the product picture.
      */
@@ -371,7 +372,7 @@ export interface ProductPicture {
 /**
  * Represents access permission functionality for checking permissions.
  */
-export interface AccessPermission {
+interface AccessPermission {
     /**
      * Checks if a customer has permission to access specific products.
      *

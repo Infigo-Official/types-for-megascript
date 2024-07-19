@@ -1,7 +1,7 @@
 ﻿/**
  * Represents a job status object used in MegaScript.
  */
-export interface JobStatus{
+interface JobStatus{
     /**
      * Gets the ID of the print order history.
      */
@@ -29,3 +29,9 @@ export interface JobStatus{
      */
     SetInfo: (info: string) => boolean;
 }
+
+/**
+ * Represents a job object used in MegaScript.
+ */
+
+declare const JobStatus: JobStatus;

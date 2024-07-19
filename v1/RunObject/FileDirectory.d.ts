@@ -1,6 +1,4 @@
-﻿import {FileInstance} from "./Files";
-
-/**
+﻿/**
  * Interface representing a directory in a file system.
  * Provides methods and properties to interact with the files and subdirectories.
  */
@@ -43,3 +41,10 @@ interface FileDirectory {
      */
     ListDirectories: (pattern?: string | null) => FileDirectory[];
 }
+
+/**
+ * Represents a file instance in a file system.
+ * Provides methods and properties to interact with the file contents.
+ */
+
+declare const FileInstance: FileInstance;

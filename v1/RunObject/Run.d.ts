@@ -1,24 +1,7 @@
-﻿import {FileObject} from "./Files";
-import {HotFolderObject} from "./HotFolder";
-import {DepartmentObject} from "./Department";
-import {CustomDataCategoryObjects} from "./CustomData";
-import {Customers} from "./Customer";
-import {MegascriptInstanceListObject} from "./Megascript";
-import {Links} from "./Link";
-import {ExternalApi} from "./ExternalApi";
-import {Products} from "./Product";
-import {Orders} from "./Order";
-import {Database} from "./Database";
-import {UploadLocation} from "./UploadLocation";
-import {CartManagement} from "./Cart";
-import {MessageHandlerObject} from "./Message";
-import {ParseObject} from "./ParseObject";
-import {CurrentContextObject} from "./Context";
-
-/**
+﻿/**
  * Represents a run instance.
  */
-export interface Run {
+ interface Run {
     /**
      * The request associated with the run.
      */
@@ -131,14 +114,48 @@ export interface Run {
 }
 
 /**
+    * Represents a Run object.
+ */
+
+declare const Run: Run;
+
+/**
  * Enum representing various flags for MegaScript instances.
  */
 declare enum MegascriptInstanceFlag {
-    RunBackground = 'RunBackground',
-    PurgeManually = 'PurgeManually',
-    TriggerViaApi = 'TriggerViaApi',
-    FromDynamicProduct = 'FromDynamicProduct',
-    OutputCreation = 'OutputCreation',
-    AsyncExecution = 'AsyncExecution',
-    Event = 'Event',
+   /**
+    * Indicates that the MegaScript should run in the background.
+    */
+   RunBackground = 'RunBackground',
+
+   /**
+    * Indicates that the MegaScript should be purged manually.
+    */
+   PurgeManually = 'PurgeManually',
+
+   /**
+    * Indicates that the MegaScript should be triggered via an API call.
+    */
+   TriggerViaApi = 'TriggerViaApi',
+
+   /**
+    * Indicates that the MegaScript is from a dynamic product.
+    */
+   FromDynamicProduct = 'FromDynamicProduct',
+
+   /**
+    * Indicates that the MegaScript is responsible for output creation.
+    */
+   OutputCreation = 'OutputCreation',
+
+   /**
+    * Indicates that the MegaScript should execute asynchronously.
+    */
+   AsyncExecution = 'AsyncExecution',
+
+   /**
+    * Indicates that the MegaScript is an event.
+    */
+   Event = 'Event',
 }
+

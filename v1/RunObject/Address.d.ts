@@ -79,7 +79,7 @@ interface Address {
 }
 
 /**
- * Represents an address with its properties.
+ * Represents an Address interface.
  */
 
 declare const Address: Address;

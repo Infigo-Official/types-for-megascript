@@ -128,7 +128,7 @@ interface LinkedJobObject {
 /**
  * Represents a group object with its properties.
  */
-export interface GroupObject {
+interface GroupObject {
     /** The unique identifier of the group. */
     Id: number;
 
@@ -139,7 +139,7 @@ export interface GroupObject {
 /**
  * Represents an object used to add an item to the basket (shopping cart).
  */
-export interface AddToBasketObjectInstance {
+interface AddToBasketObjectInstance {
     /** The customer associated with the basket item. */
     Customer: number | Customer;
 

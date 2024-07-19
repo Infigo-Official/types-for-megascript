@@ -1,7 +1,7 @@
 ﻿/**
  * Represents a paged list of data.
  */
-export interface PagedList<T> {
+interface PagedList<T> {
     /**
      * The array of data items in the current page.
      */
@@ -39,9 +39,15 @@ export interface PagedList<T> {
 }
 
 /**
+ * Represents a paged list of data.
+ */
+
+declare const PagedList: PagedList<any>;
+
+/**
  * Represents a key-value pair.
  */
-export interface KeyValue<TKey, TValue> {
+interface KeyValue<TKey, TValue> {
     /**
      * The key of the pair.
      */
@@ -56,7 +62,7 @@ export interface KeyValue<TKey, TValue> {
 /**
  * Represents an API error with details.
  */
-export interface ApiError {
+interface ApiError {
     /**
      * The error message describing the issue.
      */
@@ -76,7 +82,7 @@ export interface ApiError {
 /**
  * Represents a result object from an operation.
  */
-export interface Result {
+interface Result {
     /**
      * The identifier associated with the result.
      */
@@ -96,7 +102,7 @@ export interface Result {
 /**
  * Represents a basic model with success status and error messages.
  */
-export interface MsModel {
+interface MsModel {
     /** Indicates whether the operation was successful. */
     IsSuccess: boolean;
 
@@ -108,7 +114,7 @@ export interface MsModel {
  * Represents a base model extending from `IMsModel` with additional data of type `T`.
  * @typeparam T The type of data associated with the base model.
  */
-export interface MsBaseModel<T> extends MsModel {
+interface MsBaseModel<T> extends MsModel {
     /** The data associated with the base model. */
     Data: T;
 }

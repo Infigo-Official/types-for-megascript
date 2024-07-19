@@ -531,7 +531,7 @@ interface Department {
 /**
  * Represents a paged list.
  */
-export interface PagedList<T> {
+interface PagedList<T> {
     /**
      * The total count of items in the paged list.
      */
@@ -556,7 +556,7 @@ export interface PagedList<T> {
 /**
  * Represents the result of an access permission check for a product.
  */
-export interface MsAccessPermissionCheckResult {
+interface MsAccessPermissionCheckResult {
     /**
      * The product for which the permission is checked.
      */
@@ -577,7 +577,7 @@ export interface MsAccessPermissionCheckResult {
  * Represents the context for loading specific details of products
  * when checking access permissions.
  */
-export interface MSAccessPermissionLoadContext {
+interface MSAccessPermissionLoadContext {
     /**
      * Specifies what product details to load.
      */

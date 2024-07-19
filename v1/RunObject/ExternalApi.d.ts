@@ -1,7 +1,7 @@
 ﻿/**
  * Represents an execution object with parameters for an API call.
  */
-export interface Execution {
+interface Execution {
     /**
      * The source of the API call.
      */
@@ -44,9 +44,15 @@ export interface Execution {
 }
 
 /**
+ * Represents an execution object with parameters for an API call.
+ */
+
+declare const Execution: Execution;
+
+/**
  * Represents methods to execute external API calls.
  */
-export interface ExternalApi {
+interface ExternalApi {
     /**
      * Executes an API call based on the provided execution object.
      *

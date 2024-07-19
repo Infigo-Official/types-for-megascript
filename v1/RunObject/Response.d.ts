@@ -1,9 +1,7 @@
-﻿import {FileInstance} from "./Files";
-
-/**
+﻿/**
  * Represents a response object with methods for various types of responses.
  */
-export interface Response {
+ interface Response {
     /**
      * Sends plain text as the response.
      * @param text The text content to return.

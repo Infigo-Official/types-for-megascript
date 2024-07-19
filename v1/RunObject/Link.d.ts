@@ -1,9 +1,7 @@
-﻿import {Customer} from "./Customer";
-
-/**
+﻿/**
  * Represents a collection of methods for generating various types of links.
  */
-export interface Links {
+interface Links {
     /**
      * Generates a link for a Megascript instance.
      *
@@ -42,9 +40,15 @@ export interface Links {
 }
 
 /**
+ * Described a Links interface.
+ */
+
+declare const Links: Links;
+
+/**
  * Represents parameters for generating a Megascript link.
  */
-export interface MegascriptLinkParam {
+interface MegascriptLinkParam {
     /**
      * The name of the Megascript instance.
      */
