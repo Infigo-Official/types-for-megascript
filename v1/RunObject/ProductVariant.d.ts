@@ -1,7 +1,6 @@
 ﻿/**
  * Represents a product variant.
  */
-
 interface ProductVariant {
     /**
      * The identifier of the product variant.
@@ -472,7 +471,6 @@ declare enum ManageInventoryMethod {
      */
     ManageStockByAttributes = 2,
 }
-
 
 /**
  * Represents the action taken when a product variant is low on stock.

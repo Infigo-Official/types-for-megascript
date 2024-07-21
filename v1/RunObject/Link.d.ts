@@ -40,12 +40,6 @@ interface Links {
 }
 
 /**
- * Described a Links interface.
- */
-
-declare const Links: Links;
-
-/**
  * Represents parameters for generating a Megascript link.
  */
 interface MegascriptLinkParam {

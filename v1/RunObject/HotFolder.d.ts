@@ -10,8 +10,3 @@ interface HotFolderObject {
      */
     GetHotFolderById: (id: number) => FileDirectory | null;
 }
-
-/**
- * Represents a hot folder object with methods to manage hot folders.
- */
-declare const HotFolderObject: HotFolderObject;

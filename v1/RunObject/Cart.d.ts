@@ -137,27 +137,65 @@ interface GroupObject {
 }
 
 /**
- * Represents an object used to add an item to the basket (shopping cart).
+ * Interface representing an item to be added to the basket.
  */
 interface AddToBasketObjectInstance {
-    /** The customer associated with the basket item. */
+    /**
+     * The customer associated with the basket item.
+     * Can be a customer ID or a Customer object.
+     */
     Customer: number | Customer;
 
-    /** The product to add to the basket. */
+    /**
+     * The product to add to the basket.
+     * Can be a product ID or a Product object.
+     */
     Product: number | Product;
 
-    /** The quantity of the product to add to the basket. */
+    /**
+     * The quantity of the product to add to the basket.
+     */
     Quantity: number;
 
-    /** An array of delivery types for the basket item. */
+    /**
+     * An array of delivery types for the basket item.
+     */
     DeliveryType: string[];
 
-    /** Additional attributes associated with the basket item. */
+    /**
+     * Additional attributes associated with the basket item.
+     * A key-value pair where the key is the attribute name and the value is the attribute value.
+     */
     Attributes: { [key: string]: string };
 
-    /** The type of basket item (e.g., shopping cart, wishlist). */
+    /**
+     * The type of basket item.
+     * e.g., shopping cart, wishlist.
+     */
     Type: MsShoppingCartItemType;
 }
+
+/**
+ * Constructor interface for creating instances of AddToBasketObjectInstance.
+ */
+interface AddToBasketObjectInstanceConstructor {
+    /**
+     * Creates a new instance of AddToBasketObjectInstance.
+     * @returns A new instance of AddToBasketObjectInstance.
+     */
+    new (): AddToBasketObjectInstance;
+
+    /**
+     * The prototype of AddToBasketObjectInstance.
+     */
+    readonly prototype: AddToBasketObjectInstance;
+}
+
+/**
+ * Constructor for creating instances of AddToBasketObjectInstance.
+ */
+declare const AddToBasketObject: AddToBasketObjectInstanceConstructor;
+
 
 /**
  * Enum defining the type of basket items.

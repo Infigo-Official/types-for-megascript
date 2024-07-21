@@ -163,5 +163,3 @@ interface CSVOptions {
     replacer?: (r: number, c: number, v: any) => any;
 }
 
-declare const Tools: ToolsInterface;
-

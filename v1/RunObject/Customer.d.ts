@@ -366,12 +366,6 @@ interface Customers {
     GetDepartment: (customerId: number) => Department;
 }
 
-/**
- * Represents a customers interface.
- */
-
-declare const Customers: Customers;
-
 
 /**
  * Represents a key-value pair attribute for a customer.

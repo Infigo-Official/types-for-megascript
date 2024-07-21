@@ -1,103 +1,90 @@
 ﻿/**
- * Represents an execution object with parameters for an API call.
+ * Interface representing the execution parameters for an external API call.
  */
 interface Execution {
     /**
-     * The source of the API call.
+     * The source URL for the API call.
      */
     source: string;
 
     /**
-     * The action or endpoint of the API call.
+     * The action or endpoint to be called.
      */
     action: string;
 
     /**
-     * Headers for the API call.
+     * Headers to be included in the API request.
      */
-    header: Object;
+    header: {};
 
     /**
-     * Query parameters for the API call.
+     * Query parameters to be included in the API request.
      */
-    query: Object;
+    query: {};
 
     /**
-     * Body parameters for the API call.
+     * The body of the API request, which can vary based on the request method.
      */
-    body: Object;
+    body: {};
 
     /**
-     * Additional parameters for the API call.
+     * Additional parameters for the API request.
      */
-    parameter: Object;
+    parameter: {};
 
     /**
-     * Raw string data for the API call.
+     * Raw data to be sent in the API request.
      */
     raw: string;
 
     /**
-     * Indicates whether to send the data as form data.
+     * Indicates whether the body should be sent as form data.
+     * Optional.
      */
     sendAsForm?: boolean;
 }
 
-/**
- * Represents an execution object with parameters for an API call.
- */
-
-declare const Execution: Execution;
-
-/**
- * Represents methods to execute external API calls.
- */
 interface ExternalApi {
     /**
-     * Executes an API call based on the provided execution object.
-     *
-     * @param executionObject - Object containing execution parameters.
-     * @param callback - Callback function to handle the API response.
+     * Executes an action using the provided execution object and callback function.
+     * @param executionObject The object containing execution parameters.
+     * @param callback The callback function to handle the response.
      */
     Execute: (executionObject: Execution, callback: (response: string) => void) => void;
 
     /**
-     * Sends a GET request to an external API endpoint.
-     *
-     * @param source - The source or base URL of the API.
-     * @param action - The action or endpoint to request.
-     * @param query - Query parameters for the request.
-     * @param callback - Callback function to handle the API response.
+     * Sends a GET request to the specified source and action with the given query parameters.
+     * @param source The source URL for the GET request.
+     * @param action The action or endpoint to be called.
+     * @param query The query parameters to be included in the request.
+     * @param callback The callback function to handle the response.
      */
     Get: (source: string, action: string, query: {}, callback: (response: string) => void) => void;
 
     /**
-     * Sends a POST request to an external API endpoint with form data.
-     *
-     * @param source - The source or base URL of the API.
-     * @param action - The action or endpoint to request.
-     * @param body - Form data to send in the request body.
-     * @param callback - Callback function to handle the API response.
+     * Sends a POST request with form data to the specified source and action.
+     * @param source The source URL for the POST request.
+     * @param action The action or endpoint to be called.
+     * @param body The form data to be sent in the request.
+     * @param callback The callback function to handle the response.
      */
     PostForm: (source: string, action: string, body: {}, callback: (response: string) => void) => void;
 
     /**
-     * Sends a POST request to an external API endpoint with JSON data.
-     *
-     * @param source - The source or base URL of the API.
-     * @param action - The action or endpoint to request.
-     * @param body - JSON data to send in the request body.
-     * @param callback - Callback function to handle the API response.
+     * Sends a POST request with JSON data to the specified source and action.
+     * @param source The source URL for the POST request.
+     * @param action The action or endpoint to be called.
+     * @param body The JSON data to be sent in the request.
+     * @param callback The callback function to handle the response.
      */
     PostJson: (source: string, action: string, body: {}, callback: (response: string) => void) => void;
 
     /**
-     * Sends a POST request to an external API endpoint with raw data.
-     *
-     * @param source - The source or base URL of the API.
-     * @param action - The action or endpoint to request.
-     * @param body - Raw data to send in the request body.
-     * @param callback - Callback function to handle the API response.
+     * Sends a POST request with raw data to the specified source and action.
+     * @param source The source URL for the POST request.
+     * @param action The action or endpoint to be called.
+     * @param body The raw data to be sent in the request.
+     * @param callback The callback function to handle the response.
      */
     PostRaw: (source: string, action: string, body: {}, callback: (response: string) => void) => void;
 }

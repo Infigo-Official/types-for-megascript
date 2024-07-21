@@ -77,9 +77,3 @@ interface Address {
      */
     MisConfigurations: MisConfigType[];
 }
-
-/**
- * Represents an Address interface.
- */
-
-declare const Address: Address;

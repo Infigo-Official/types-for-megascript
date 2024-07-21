@@ -1,286 +1,200 @@
 ﻿/**
- * Represents a PDF document with various properties and methods for PDF operations.
+ * Represents a PDF instance with various methods and properties for PDF manipulation.
  */
-
 interface PdfInstance {
     /**
-     * Opens the PDF file with an optional password.
-     * @param file The path to the PDF file.
-     * @param password Optional password to decrypt the PDF file.
-     * @returns True if the file is opened successfully, false otherwise.
-     */
-    Open: (file: string, password?: string) => boolean;
-
-    /**
-     * Draws a dynamic template on the specified start page.
-     * @param templateXml The XML string representing the dynamic template.
-     * @param startPage The page number to start drawing the template on.
-     * @returns True if the drawing was successful, false otherwise.
+     * Draws a dynamic template on the PDF.
+     * @param templateXml The XML string defining the template.
+     * @param startPage The starting page number for the template.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
     DrawDynamicTemplate: (templateXml: string, startPage: number) => boolean;
 
     /**
-     * Gets the number of pages in the PDF document.
-     * @returns The number of pages in the document.
+     * Creates a new layer in the PDF.
+     * @param name The name of the layer.
+     * @param visible Optional. The visibility of the layer. Defaults to `true`.
+     * @param intent Optional. The intent for the layer.
+     * @returns The created layer object.
      */
-    GetPageCount: () => number;
+    CreateLayer: (name: string, visible?: boolean, intent?: number) => PdfLayer;
+
+    /**
+     * Gets the layer at the specified index.
+     * @param index The index of the layer.
+     * @returns The layer object at the specified index.
+     */
+    GetLayerAt: (index: number) => PdfLayer;
+
+    /**
+     * Gets the count of layers in the PDF.
+     */
+    LayerCount: number;
+
+    /**
+     * Gets the count of pages in the PDF.
+     */
+    PageCount: number;
+
+    /**
+     * Gets the count of images in the PDF.
+     */
+    ImageCount: number;
+
+    /**
+     * Gets or sets the author of the PDF.
+     */
+    Author: string;
+
+    /**
+     * Gets or sets the creator of the PDF.
+     */
+    Creator: string;
+
+    /**
+     * Gets or sets the keywords associated with the PDF.
+     */
+    Keywords: string;
+
+    /**
+     * Gets or sets the producer of the PDF.
+     */
+    Producer: string;
+
+    /**
+     * Gets or sets the subject of the PDF.
+     */
+    Subject: string;
+
+    /**
+     * Gets or sets the title of the PDF.
+     */
+    Title: string;
+
+    /**
+     * Gets the document ID of the PDF.
+     */
+    DocumentId: string;
+
+    /**
+     * Gets the version ID of the PDF.
+     */
+    VersionId: string;
+
+    /**
+     * Gets or sets the manager of the PDF.
+     */
+    Manager: string;
+
+    /**
+     * Gets a value indicating whether the PDF is open.
+     */
+    IsOpen: boolean;
+
+    /**
+     * Clears the PDF instance.
+     */
+    Clear: () => void;
+
+    /**
+     * Gets or sets custom metadata for the PDF.
+     */
+    Custom: IPdfMetaData;
+
+    /**
+     * Appends another PDF file to this PDF.
+     * @param file The PDF file instance to append.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    AppendPdfFile: (file: FileInstance) => boolean;
 
     /**
      * Inserts a new page at the specified index.
-     * @param index The index at which to insert the new page.
-     * @returns A PdfPage object representing the new page.
+     * @param index The index at which to insert the page.
+     * @returns The inserted page object.
      */
     InsertPage: (index: number) => PdfPage;
 
     /**
-     * Adds a new page to the end of the PDF document.
-     * @returns A PdfPage object representing the new page.
+     * Adds a new page to the end of the PDF.
+     * @returns The added page object.
      */
     AddPage: () => PdfPage;
 
     /**
      * Deletes the page at the specified index.
      * @param index The index of the page to delete.
-     * @returns True if the page was deleted successfully, false otherwise.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
     DeletePage: (index: number) => boolean;
 
     /**
-     * Deletes a range of pages starting from the specified index.
+     * Deletes multiple pages starting from the specified index.
      * @param index The starting index of the pages to delete.
      * @param count The number of pages to delete.
-     * @returns True if the pages were deleted successfully, false otherwise.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
     DeletePages: (index: number, count: number) => boolean;
 
     /**
-     * Swaps the positions of two pages.
+     * Swaps two pages in the PDF.
      * @param firstIndex The index of the first page.
      * @param secondIndex The index of the second page.
-     * @returns True if the pages were swapped successfully, false otherwise.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
     SwapPages: (firstIndex: number, secondIndex: number) => boolean;
 
     /**
      * Moves a page from one index to another.
-     * @param srcIndex The index of the page to move.
-     * @param destIndex The index to move the page to.
-     * @returns True if the page was moved successfully, false otherwise.
+     * @param srcIndex The source index of the page.
+     * @param destIndex The destination index of the page.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
     MovePage: (srcIndex: number, destIndex: number) => boolean;
 
     /**
      * Gets the page at the specified index.
-     * @param index The index of the page to retrieve.
-     * @returns A PdfPage object representing the page.
+     * @param index The index of the page.
+     * @returns The page object at the specified index.
      */
-    GetPage: (index: number) => PdfPage;
+    GetPageAt: (index: number) => PdfPage;
 
     /**
-     * Creates a new layer in the PDF document.
-     * @param name The name of the layer.
-     * @param visible Whether the layer should be visible by default.
-     * @param intent The intent of the layer (0 for view, 1 for design).
-     * @returns A PdfLayer object representing the new layer.
+     * Extracts pages from the PDF to another file.
+     * @param target The target file instance to extract pages to.
+     * @param pages The pages to extract.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
-    CreateLayer: (name: string, visible?: boolean, intent?: number) => PdfLayer;
+    ExtractPages: (target: FileInstance, pages: object) => boolean;
 
     /**
-     * Gets the layer at the specified index.
-     * @param index The index of the layer to retrieve.
-     * @returns A PdfLayer object representing the layer.
-     */
-    GetLayer: (index: number) => PdfLayer;
-
-    /**
-     * Gets the number of layers in the PDF document.
-     * @returns The number of layers in the document.
-     */
-    GetLayerCount: () => number;
-
-    /**
-     * Clears the content of the PDF document.
-     */
-    Clear: () => void;
-
-    /**
-     * Appends another PDF file to the current document.
-     * @param file The file instance of the PDF to append.
-     * @returns True if append was successful, false otherwise.
-     */
-    AppendPdfFile: (file: FileInstance) => boolean;
-
-    /**
-     * Extracts specified pages from the PDF document and saves them to a new file.
-     * @param target The file instance to save the extracted pages.
-     * @param pages An array or list specifying the indices of pages to extract.
-     * @returns True if extraction and save were successful, false otherwise.
-     */
-    ExtractPages: (target: FileInstance, pages: number[]) => boolean;
-
-    /**
-     * Retrieves the image object at the specified index.
-     * @param index The index of the image to retrieve.
-     * @returns The PdfImage object at the specified index, or null if index is out of range.
-     */
-    GetImageAt: (index: number) => PdfImage | null;
-
-    /**
-     * Extracts text content from the PDF document.
-     * @param asFormatted Whether to extract text with formatting (if available).
-     * @returns The extracted text content.
+     * Extracts text from the PDF.
+     * @param asFormatted Indicates whether to extract the text as formatted.
+     * @returns The extracted text.
      */
     ExtractText: (asFormatted: boolean) => string;
 
     /**
-     * Gets or sets the author metadata of the PDF document.
-     */
-    Author: string;
-
-    /**
-     * Gets or sets the creator metadata of the PDF document.
-     */
-    Creator: string;
-
-    /**
-     * Gets or sets the keywords metadata of the PDF document.
-     */
-    Keywords: string;
-
-    /**
-     * Gets or sets the producer metadata of the PDF document.
-     */
-    Producer: string;
-
-    /**
-     * Gets or sets the subject metadata of the PDF document.
-     */
-    Subject: string;
-
-    /**
-     * Gets or sets the title metadata of the PDF document.
-     */
-    Title: string;
-
-    /**
-     * Clears metadata information from the PDF document.
-     * @param customOnly If true, clears only custom metadata fields.
+     * Clears the metadata of the PDF.
+     * @param customOnly Indicates whether to clear only custom metadata.
      */
     ClearMetaData: (customOnly: boolean) => void;
 
     /**
-     * Gets or sets the document ID metadata of the PDF document.
+     * Saves the PDF to a file.
+     * @param file Optional. The file instance to save to.
+     * @param createHumanReadable Optional. Indicates whether to create a human-readable PDF.
+     * @param linearize Optional. Indicates whether to linearize the PDF.
+     * @param producePdfA Optional. Indicates whether to produce a PDF/A.
+     * @param doNotSyncMetaData Optional. Indicates whether to skip syncing metadata.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
-    DocumentId: string;
+    Save: (file?: FileInstance, createHumanReadable?: boolean, linearize?: boolean, producePdfA?: boolean, doNotSyncMetaData?: boolean) => boolean;
 
     /**
-     * Gets the version ID metadata of the PDF document.
-     */
-    VersionId: string;
-
-    /**
-     * Gets the manager metadata of the PDF document.
-     */
-    Manager: string;
-
-    /**
-     * Gets or sets information about the document's origin.
-     */
-    DerivedFrom: IPdfMetaData;
-
-    /**
-     * Gets information about the document's managed origin.
-     */
-    ManagedFrom: IPdfMetaData;
-
-    /**
-     * Gets or sets custom metadata associated with the PDF document.
-     */
-    Custom: IPdfMetaData;
-
-    /**
-     * Sets page split information for the PDF document.
-     * @param info Array containing page split information objects.
-     * @returns True if page split information was successfully set; otherwise, false.
-     */
-    SetPageSplitInformation: (info: PdfPage[]) => boolean;
-
-    /**
-     * Removes signature permissions from the PDF document.
-     * @returns True if signature permissions were successfully removed; otherwise, false.
-     */
-    RemoveSignaturePermissions: () => boolean;
-
-    /**
-     * Removes structure information from the PDF document.
-     * @returns True if structure information was successfully removed; otherwise, false.
-     */
-    RemoveStructureInformation: () => boolean;
-
-    /**
-     * Removes transparency groups from the PDF document.
-     * @returns True if transparency groups were successfully removed; otherwise, false.
-     */
-    RemoveTransparencyGroups: () => boolean;
-
-    /**
-     * Gets the PDF/A conformance level of the PDF document.
-     */
-    PdfaConformance: string;
-
-    /**
-     * Flattens form controls in the PDF document.
-     * @returns True if form controls were successfully flattened; otherwise, false.
-     */
-    FlattenControls: () => boolean;
-
-    /**
-     * Imports form data from an FDF file into the PDF document.
-     * @param file The file instance of the FDF file to import.
-     * @returns True if form data was successfully imported; otherwise, false.
-     */
-    ImportFdf: (file: FileInstance) => boolean;
-
-    /**
-     * Exports form data from the PDF document into an FDF file.
-     * @param file The file instance to save the exported FDF data.
-     * @returns True if form data was successfully exported; otherwise, false.
-     */
-    ExportFdf: (file: FileInstance) => boolean;
-
-    /**
-     * Adds an attachment to the PDF document.
-     * @param file The file instance of the attachment to add.
-     * @returns True if the attachment was successfully added; otherwise, false.
-     */
-    AddAttachment: (file: FileInstance) => boolean;
-
-    /**
-     * Saves the PDF document to a file with specified options.
-     * @param file The file instance to save the PDF document.
-     * @param createHumanReadable Whether to create a human-readable PDF.
-     * @param linearize Whether to linearize the PDF for fast web view.
-     * @param producePdfA Whether to produce a PDF/A compliant document.
-     * @param doNotSyncMetaData Whether to exclude syncing metadata.
-     * @returns True if the document was saved successfully; otherwise, false.
-     */
-    Save: (
-        file: FileInstance,
-        createHumanReadable: boolean,
-        linearize: boolean,
-        producePdfA: boolean,
-        doNotSyncMetaData: boolean
-    ) => boolean;
-
-    /**
-     * Closes the PDF document.
+     * Closes the PDF instance.
      */
     Close: () => void;
-
-    /**
-     * Indicates whether the PDF document is currently open.
-     */
-    IsOpen: boolean;
 }
 
 /**

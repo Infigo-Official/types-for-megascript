@@ -68,12 +68,6 @@ interface CurrentContextObject {
 }
 
 /**
- * Represents current context object description.
- */
-
-declare const CurrentContextObject: CurrentContextObject;
-
-/**
  * Represents an output file extending a file object.
  */
 interface OutputFile extends FileObject {

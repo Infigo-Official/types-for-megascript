@@ -329,7 +329,7 @@ interface OrderProductVariant {
      * @param keyValues The key-value pairs of custom data to update.
      * @returns The result object of the update operation.
      */
-    UpdateCustomData: (keyValues: any) => any; // todo: define the return type ResultObject
+    UpdateCustomData: (keyValues: any) => ResultObject;
 
     /**
      * Clears the job folder associated with the order product variant.
@@ -364,10 +364,16 @@ interface OrderProductVariant {
 }
 
 /**
- * Represents order product variant object.
- */
-
-declare const OrderProductVariant: OrderProductVariant;
+* Represents the order product variants object.
+*/
+interface OrderProductVariantsObject {
+    /**
+     * Finds an order product variant by its ID.
+     * @param id - The ID of the order product variant to find.
+     * @returns The found order product variant object, or null if not found.
+     */
+    FindById(id: number): OrderProductVariant | null;
+}
 
 /**
  * Represents the result of an upload operation.
@@ -387,4 +393,24 @@ interface OutputResult {
      * URLs of thumbnails generated during the upload.
      */
     ThumbnailsUrl: string[];
+}
+
+/**
+ * Represents the result of an operation in the MegaScript context.
+ */
+interface ResultObject {
+    /**
+     * Gets or sets the unique identifier for the result.
+     */
+    Id: number;
+
+    /**
+     * Gets or sets a boolean indicating whether the operation was successful.
+     */
+    Success: boolean;
+
+    /**
+     * Gets or sets the array of error messages associated with the result.
+     */
+    Errors: string[];
 }

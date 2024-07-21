@@ -1,155 +1,163 @@
 ﻿/**
- * Represents a file instance with various properties and methods for file operations.
+ * Interface representing a file instance with various properties and methods for file manipulation.
  */
- interface FileInstance {
+interface FileInstance {
     /**
-     * Gets the name of the file without the extension.
-     * Example: If the file is 'document.txt', this returns 'document'.
+     * Gets the name of the file.
      */
     Name: string;
 
     /**
-     * Gets the extension of the file including the dot.
-     * Example: For 'document.txt', this returns '.txt'.
+     * Gets the file extension.
      */
     Extension: string;
 
     /**
-     * Gets the MIME type of the file if it exists.
-     * Example: For 'document.pdf', this returns 'application/pdf'.
+     * Gets the MIME type of the file.
      */
     MimeType: string;
 
     /**
-     * Gets the full name of the file including its extension.
-     * Example: For 'document.txt', this returns 'document.txt'.
+     * Gets the full name (including path) of the file.
      */
     FullName: string;
 
     /**
      * Gets the size of the file in bytes.
-     * Returns -1 if the file does not exist.
      */
     FileSize: number;
 
     /**
-     * Checks if the file exists.
-     * Returns true if the file exists, false otherwise.
+     * Indicates whether the file exists.
      */
     Exists: boolean;
 
     /**
      * Gets the last access time of the file in UTC.
-     * Returns null if the file does not exist.
      */
-    LastAccessTimeUtc: Date | null;
+    LastAccessTimeUtc: Date;
 
     /**
      * Gets the last write time of the file in UTC.
-     * Returns null if the file does not exist.
      */
-    LastWriteTimeUtc: Date | null;
+    LastWriteTimeUtc: Date;
 
     /**
      * Gets the creation time of the file in UTC.
-     * Returns null if the file does not exist.
      */
-    CreationTimeUtc: Date | null;
+    CreationTimeUtc: Date;
 
     /**
      * Deletes the file.
-     * Returns true if the file was successfully deleted, false otherwise.
+     * @returns `true` if the file was successfully deleted, otherwise `false`.
      */
     Delete: () => boolean;
 
     /**
-     * Gets the Base64 encoded string of the file's content.
-     * Returns null if the file does not exist.
+     * Gets the base64 representation of the file.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
-    GetBase64: () => string | null;
+    GetBase64: () => boolean;
 
     /**
-     * Gets the SHA-256 hash of the file's content as a hexadecimal string.
-     * Returns null if the file does not exist.
+     * Gets the SHA-256 hash of the file.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
-    GetSha256: () => string | null;
+    GetSha256: () => boolean;
 
     /**
-     * Moves the file to a new name and/or target directory.
-     * @param newName The new name for the file.
-     * @param newTarget The new target directory where the file should be moved.
-     * Returns true if the move was successful, false otherwise.
+     * Moves the file to a new location.
+     * @param newName The new name of the file.
+     * @param newTarget The target directory to move the file to.
+     * @returns `true` if the file was successfully moved, otherwise `false`.
      */
     Move: (newName: string, newTarget: FileDirectory) => boolean;
 
     /**
-     * Copies the file to a new name and/or target directory.
-     * @param newName The new name for the copied file.
-     * @param newTarget The new target directory where the file should be copied.
-     * Returns a new IFileInstance representing the copied file, or null if the copy failed.
+     * Copies the file to a new location.
+     * @param newName The new name of the file.
+     * @param newTarget The target directory to copy the file to.
+     * @returns The copied file instance.
      */
-    Copy: (newName: string, newTarget: FileDirectory) => FileInstance | null;
+    Copy: (newName: string, newTarget: FileDirectory) => FileInstance;
 
     /**
-     * Saves text content to the file, overwriting existing content.
+     * Saves text content to the file.
      * @param text The text content to save.
-     * Returns true if the save was successful, false otherwise.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
     SaveText: (text: string) => boolean;
 
     /**
-     * Saves Base64 encoded content to the file, overwriting existing content.
-     * @param base64 The Base64 encoded content to save.
-     * Returns true if the save was successful, false otherwise.
+     * Saves base64 content to the file.
+     * @param base64 The base64 content to save.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
     SaveBase64: (base64: string) => boolean;
 
     /**
-     * Saves binary data to the file, overwriting existing content.
-     * @param data The binary data to save as an array of bytes.
-     * Returns true if the save was successful, false otherwise.
+     * Saves binary data to the file.
+     * @param data The binary data to save.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
-    SaveBinary: (data: number[]) => boolean;
+    SaveBinary: (data: []) => boolean;
 
     /**
-     * Loads and returns the text content of the file.
-     * Returns null if the file does not exist or an error occurs.
+     * Loads text content from the file.
+     * @returns The loaded text content.
      */
-    LoadText: () => string | null;
+    LoadText: () => string;
 
     /**
-     * Loads and returns the binary content of the file as an array of bytes.
-     * Returns null if the file does not exist or an error occurs.
+     * Loads binary data from the file.
+     * @returns The loaded binary data.
      */
-    LoadBinary: () => number[] | null;
+    LoadBinary: () => [];
 
     /**
-     * Loads metadata for the file.
-     * @param metaDataToLoad Specifies which metadata to load (default is MetaDataToLoad.All).
-     * Returns an IJobMetaDataInstanceObject representing the file's metadata.
+     * Loads metadata from the file.
+     * @param metaData Optional. The metadata to load.
+     * @returns The loaded metadata instance.
      */
-    LoadMetaData: (metaDataToLoad?: MetaDataToLoad) => JobMetaDataInstanceObject;
+    LoadMetaData: (metaData?: MetaDataToLoad) => JobMetaDataInstanceObject;
 
     /**
-     * Creates a PDF document based on a dynamic template XML and saves it to the file.
-     * @param templateXml The XML string representing the dynamic template.
-     * Returns true if the PDF was created successfully, false otherwise.
+     * Creates a PDF from a dynamic template.
+     * @param templateXml The XML string defining the template.
+     * @returns `true` if the operation is successful, otherwise `false`.
      */
     CreatePdfWithDynamicTemplate: (templateXml: string) => boolean;
 
     /**
      * Opens the file as a PDF document.
-     * @param password The optional password for opening encrypted PDF files.
-     * Returns an IPdfInstance representing the PDF document, or null if the file is not a PDF or cannot be opened.
+     * @param password Optional. The password to open the PDF document.
+     * @returns The PDF instance.
      */
-    OpenAsPdfDocument: (password?: string | null) => PdfInstance | null;
+    OpenAsPdfDocument: (password?: string | null) => PdfInstance;
 }
 
 /**
- * Represents a file directory with various properties and methods for directory operations.
+ * Interface representing the constructor for creating instances of FileInstance.
  */
+interface FileInstanceConstructor {
+    /**
+     * Creates a new instance of FileInstance.
+     * @param file - The name of the file.
+     * @param folder - The directory where the file is located.
+     * @returns A new instance of FileInstance.
+     */
+    new(file: string, folder: FileDirectory): FileInstance;
 
-declare const FileDirectory: FileDirectory;
+    /**
+     * The prototype of FileInstance. This is used to access properties and methods shared across all instances.
+     */
+    readonly prototype: FileInstance;
+}
+
+/**
+ * Declare the FileInstance variable as a constructor for creating FileInstance objects.
+ */
+declare const FileInstance: FileInstanceConstructor;
 
 /**
  * Enum representing different types of metadata that can be loaded.

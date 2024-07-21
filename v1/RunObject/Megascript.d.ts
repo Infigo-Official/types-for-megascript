@@ -44,11 +44,6 @@ interface MegascriptInstance {
 }
 
 /**
- * Represents a Megascript instance with its properties.
- */
-declare const MegascriptInstance: MegascriptInstance;
-
-/**
  * Represents a container object for a single Megascript instance.
  */
 interface MegascriptInstanceListObject {

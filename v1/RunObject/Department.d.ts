@@ -29,12 +29,6 @@ interface DepartmentObject {
 }
 
 /**
- * Represents a department object with methods to manage departments.
- */
-declare const DepartmentObject: DepartmentObject;
-
-
-/**
  * Represents a department with its properties.
  */
 interface Department {
@@ -68,9 +62,3 @@ interface Department {
      */
     Email: string;
 }
-
-/**
- * Represents a Department interface.
- */
-
-declare const Department: Department;

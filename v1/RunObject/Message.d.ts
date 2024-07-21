@@ -42,7 +42,7 @@ interface MessageHandlerObject {
 }
 
 /**
- * Represents a message context object used for configuring and sending messages.
+ * Interface representing the message context object.
  */
 interface MessageContextObject {
     /**
@@ -134,8 +134,31 @@ interface MessageContextObject {
 }
 
 /**
- * Builder object for managing message tokens.
- */ 
+ * Interface representing the constructor for creating instances of MessageContextObject.
+ */
+interface MessageContextObjectConstructor {
+    /**
+     * Creates a new instance of MessageContextObject.
+     * @param toEmail The email address of the recipient.
+     * @param toName The name of the recipient.
+     * @returns A new instance of MessageContextObject.
+     */
+    new (toEmail: string, toName: string): MessageContextObject;
+
+    /**
+     * The prototype of MessageContextObject.
+     */
+    readonly prototype: MessageContextObject;
+}
+
+/**
+ * Constructor for creating instances of MessageContextObject.
+ */
+declare const Message: MessageContextObjectConstructor;
+
+/**
+ * Provides methods for adding various types of tokens to a message.
+ */
 interface MessageTokenBuilderObject {
     /**
      * Adds an order ID token.
@@ -201,7 +224,7 @@ interface MessageTokenBuilderObject {
 }
 
 /**
- * Represents a recipient for messaging.
+ * Represents a recipient with name and email details.
  */
 interface Recipient {
     /**
@@ -214,4 +237,3 @@ interface Recipient {
      */
     ToEmail: string;
 }
-

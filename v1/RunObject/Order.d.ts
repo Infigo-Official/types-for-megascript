@@ -166,7 +166,7 @@ interface Order {
      * @param keyValues Key-values parameter representing the custom data to update.
      * Returns a ResultObject representing the result of the update.
      */
-    UpdateCustomData: (keyValues: object) => CustomDataUpdateModel;
+    UpdateCustomData: (keyValues: object) => ResultObject;
 
     /**
      * Sets the tracking number for the order.
@@ -196,12 +196,15 @@ interface Order {
      * @param value The value of the extra data. If null, the extra data is deleted.
      */
     SetExtraData: (key: string, value: string | null) => void;
-}
 
-/**
- * Represents order interface.
- */
-declare const Order: Order;
+    /**
+     * Adds a note to the order.
+     * @param note The note to be added to the order.
+     * @param displayToCustomer Optional. Indicates whether the note should be displayed to the customer.
+     * @returns A boolean indicating success or failure of adding the note.
+     */
+    AddOrderNotes: (note: string, displayToCustomer?: boolean) => boolean;
+}
 
 /**
  * Represents operations related to orders.
@@ -279,11 +282,6 @@ interface Orders {
         orderAscending: boolean
     ) => PagedList<OrderProductVariant>;
 }
-
-/**
- * The orders object provides operations for managing orders.
- */
-declare const Orders: Orders;
 
 /**
  * Represents operations to search for orders.

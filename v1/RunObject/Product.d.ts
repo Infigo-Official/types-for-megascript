@@ -174,12 +174,6 @@ interface Product {
 }
 
 /**
- * Represents a product interface.
- */
-
-declare const Product: Product;
-
-/**
  * Represents a collection of product-related methods.
  */
 interface Products {
@@ -300,51 +294,6 @@ interface ProductCrossSells {
 }
 
 /**
- * Represents product specification attributes.
- */
-interface ProductSpecificationAttributes {
-    /**
-     * Name of the specification attribute.
-     */
-    Name: string;
-
-    /**
-     * Value of the specification attribute.
-     */
-    Value: string;
-
-    /**
-     * Determines if the attribute should be shown on the product page.
-     */
-    ShowOnProductPage: boolean;
-
-    /**
-     * Determines if the attribute should be hidden from customers.
-     */
-    HideFromCustomer: boolean;
-
-    /**
-     * Display order of the attribute.
-     */
-    DisplayOrder: number;
-}
-
-/**
- * Represents a print location for products.
- */
-interface PrintLocation {
-    /**
-     * The name of the print location.
-     */
-    Name: string;
-
-    /**
-     * The description of the print location.
-     */
-    Description: string;
-}
-
-/**
  * Represents a picture associated with a product.
  */
 interface ProductPicture {
@@ -382,7 +331,7 @@ interface AccessPermission {
      * @param loadContext - The context for loading access permissions.
      * @returns An array of permission check results.
      */
-    CheckPermission(customer: Customer, products: Product[], includeReason: boolean, loadContext: MSAccessPermissionLoadContext): MsAccessPermissionCheckResult[];
+    CheckPermission(customer: Customer, products: Product[] | number[] | number, includeReason: boolean, loadContext: MSAccessPermissionLoadContext): MsAccessPermissionCheckResult[];
 }
 
 

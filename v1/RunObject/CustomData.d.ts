@@ -110,6 +110,28 @@ interface CustomDataSearchObject {
 }
 
 /**
+ * Constructor interface for creating instances of CustomDataSearchObject.
+ */
+interface CustomDataSearchObjectConstructor {
+    /**
+     * Creates a new instance of CustomDataSearchObject.
+     * @returns A new instance of CustomDataSearchObject.
+     */
+    new (): CustomDataSearchObject;
+
+    /**
+     * The prototype of CustomDataSearchObject.
+     */
+    readonly prototype: CustomDataSearchObject;
+}
+
+/**
+ * Constructor for creating instances of CustomDataSearchObject.
+ */
+declare const CustomDataSearchObject: CustomDataSearchObjectConstructor;
+
+
+/**
  * Represents a custom data category object.
  */
 interface CustomDataCategoryObject {

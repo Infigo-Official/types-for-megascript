@@ -29,9 +29,3 @@ interface JobStatus{
      */
     SetInfo: (info: string) => boolean;
 }
-
-/**
- * Represents a job object used in MegaScript.
- */
-
-declare const JobStatus: JobStatus;

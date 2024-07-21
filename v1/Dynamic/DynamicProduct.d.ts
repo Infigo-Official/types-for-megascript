@@ -55,7 +55,7 @@ interface DynamicProduct {
      * @param sourcePage - The index of the source page from the dynamic product.
      * @returns {boolean} Returns true if the content was successfully impressed onto the target page, false otherwise.
      */
-    ImpressOn(targetPage: PdfInstance, sourcePage: number): boolean;
+    ImpressOn(targetPage: PdfPage, sourcePage: number): boolean;
 
     /**
      * Gets the number of pages in the dynamic product.
@@ -67,7 +67,7 @@ interface DynamicProduct {
     /**
      * Retrieves the size of a specified page by its index.
      * @param pageIndex - The index of the page to retrieve the size for.
-     * @returns {IRectangle | null} An object representing the size of the page or null if the page index is invalid.
+     * @returns {Rectangle | null} An object representing the size of the page or null if the page index is invalid.
      */
     GetPageSize(pageIndex: number): Rectangle | null;
 
@@ -129,9 +129,30 @@ interface DynamicProduct {
     LoadFromFile(json: string): boolean;
 }
 
+/**
+ * A constructor interface for creating instances of DynamicProduct.
+ */
+interface DynamicProductConstructor {
+    /**
+     * Creates a new instance of `DynamicProduct` with the given `id`.
+     *
+     * @param id - The identifier for the `DynamicProduct` instance.
+     * @returns A new instance of `DynamicProduct`.
+     */
+    new (id: number): DynamicProduct;
+
+    /**
+     * The prototype property of the `DynamicProduct` class.
+     *
+     * This property provides access to the prototype of the `DynamicProduct` class,
+     * allowing access to methods and properties defined on the prototype.
+     */
+    readonly prototype: DynamicProduct;
+}
 
 /**
- * The dynamic product interface
+ * Provides access to the DynamicProduct constructor.
  */
-declare const DynamicProduct: DynamicProduct;
+declare const DynamicProduct: DynamicProductConstructor;
+
 

@@ -21,7 +21,7 @@
      * Headers of the request.
      */
     Headers: Object;
-0
+
     /**
      * Body content of the request.
      */
