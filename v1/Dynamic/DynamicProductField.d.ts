@@ -100,12 +100,26 @@ declare enum DynamicFieldType {
 }
 
 /**
- * Enum representing specific field types, with 'Catfish.BarcodeField' as an example.
- * This could be expanded with more field types as needed.
+ * Enum representing specific field types in the application.
+ * This enum can be expanded with additional field types as needed.
  */
 declare enum FieldTypes {
     /**
-     * A field specifically for barcode data, represented by 'Catfish.BarcodeField'.
+     * A field specifically for barcode data.
+     * It is used for encoding and displaying barcode information.
      */
-    Barcode = 'Catfish.BarcodeField'
+    Barcode = 'Catfish.BarcodeField',
+
+    /**
+     * A field designed to display charts and graphs.
+     * This field type can be used to represent various data visualizations, such as pie charts, line charts, etc.
+     */
+    Chart = 'Catfish.ChartField',
+
+    /**
+     * A field for basic drawing functionalities.
+     * It allows users to create simple drawings or annotations.
+     */
+    BasicDraw = 'Catfish.BasicDrawField',
 }
+

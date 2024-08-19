@@ -1,10 +1,4 @@
 ﻿/**
- * This defines the common base field interface shared among all types.
- *
- * @module Customer / Base Field
- */
-
-/**
  * Represents a customer in the system.
  */
 interface Customer {
@@ -284,6 +278,10 @@ declare const Customer: Customer;
  * Represents a collection of methods to manage customers.
  */
 interface Customers {
+    /**
+     * Provides access to budget-related operations for customers.
+     */
+    Budgets: Budgets;
     /**
      * Finds a customer by their identifier.
      *

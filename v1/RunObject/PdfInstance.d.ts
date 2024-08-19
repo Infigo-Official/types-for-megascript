@@ -72,12 +72,12 @@ interface PdfInstance {
     Title: string;
 
     /**
-     * Gets the document ID of the PDF.
+     * Gets or sets the document ID of the PDF.
      */
     DocumentId: string;
 
     /**
-     * Gets the version ID of the PDF.
+     * Gets or sets the version ID of the PDF.
      */
     VersionId: string;
 
@@ -85,6 +85,94 @@ interface PdfInstance {
      * Gets or sets the manager of the PDF.
      */
     Manager: string;
+
+    /**
+     * Gets or sets the "Derived From" information of the PDF.
+     */
+    DerivedFrom: Object;
+
+    /**
+     * Gets or sets the "Managed From" information of the PDF.
+     */
+    ManagedFrom: {};
+
+    /**
+     * Gets or sets custom metadata for the PDF.
+     */
+    Custom: IPdfMetaData;
+
+    /**
+     * Sets page split information.
+     * @param info Array of page split information.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    SetPageSplitInformation: (info: []) => boolean;
+
+    /**
+     * Removes signature permissions from the PDF.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    RemoveSignaturePermissions: () => boolean;
+
+    /**
+     * Removes structure information from the PDF.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    RemoveStructureInformation: () => boolean;
+
+    /**
+     * Removes transparency groups from the PDF.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    RemoveTransparencyGroups: () => boolean;
+
+    /**
+     * Gets the PDF/A conformance level of the PDF.
+     */
+    PdfaConformance: string;
+
+    /**
+     * Flattens interactive form fields and annotations.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    FlattenControls: () => boolean;
+
+    /**
+     * Imports FDF data into the PDF.
+     * @param file The file instance containing the FDF data.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    ImportFdf: (file: FileInstance) => boolean;
+
+    /**
+     * Exports FDF data from the PDF.
+     * @param file The file instance to save the FDF data.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    ExportFdf: (file: FileInstance) => boolean;
+
+    /**
+     * Adds an attachment to the PDF.
+     * @param file The file instance to attach.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    AddAttachement: (file: FileInstance) => boolean;
+
+    /**
+     * Saves the PDF to a file.
+     * @param file Optional. The file instance to save to.
+     * @param createHumanReadable Optional. Indicates whether to create a human-readable PDF.
+     * @param linearize Optional. Indicates whether to linearize the PDF.
+     * @param producePdfA Optional. Indicates whether to produce a PDF/A.
+     * @param doNotSyncMetaData Optional. Indicates whether to skip syncing metadata.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    Save: (file?: FileInstance, createHumanReadable?: boolean, linearize?: boolean, producePdfA?: boolean, doNotSyncMetaData?: boolean) => boolean;
+
+    /**
+     * Closes the PDF instance.
+     */
+    Close: () => void;
 
     /**
      * Gets a value indicating whether the PDF is open.
@@ -95,11 +183,6 @@ interface PdfInstance {
      * Clears the PDF instance.
      */
     Clear: () => void;
-
-    /**
-     * Gets or sets custom metadata for the PDF.
-     */
-    Custom: IPdfMetaData;
 
     /**
      * Appends another PDF file to this PDF.
@@ -169,32 +252,10 @@ interface PdfInstance {
 
     /**
      * Extracts text from the PDF.
-     * @param asFormatted Indicates whether to extract the text as formatted.
+     * @param asFormated Indicates whether to extract the text as formatted.
      * @returns The extracted text.
      */
-    ExtractText: (asFormatted: boolean) => string;
-
-    /**
-     * Clears the metadata of the PDF.
-     * @param customOnly Indicates whether to clear only custom metadata.
-     */
-    ClearMetaData: (customOnly: boolean) => void;
-
-    /**
-     * Saves the PDF to a file.
-     * @param file Optional. The file instance to save to.
-     * @param createHumanReadable Optional. Indicates whether to create a human-readable PDF.
-     * @param linearize Optional. Indicates whether to linearize the PDF.
-     * @param producePdfA Optional. Indicates whether to produce a PDF/A.
-     * @param doNotSyncMetaData Optional. Indicates whether to skip syncing metadata.
-     * @returns `true` if the operation is successful, otherwise `false`.
-     */
-    Save: (file?: FileInstance, createHumanReadable?: boolean, linearize?: boolean, producePdfA?: boolean, doNotSyncMetaData?: boolean) => boolean;
-
-    /**
-     * Closes the PDF instance.
-     */
-    Close: () => void;
+    ExtractText: (asFormated: boolean) => string;
 }
 
 /**

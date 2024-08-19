@@ -1,6 +1,7 @@
 ﻿/// <reference path="RunObject/Run.d.ts" />
 /// <reference path="RunObject/Address.d.ts" />
 /// <reference path="RunObject/Attribute.d.ts" />
+/// <reference path="RunObject/Budgets.d.ts" />
 /// <reference path="RunObject/Cart.d.ts" />
 /// <reference path="RunObject/Context.d.ts" />
 /// <reference path="RunObject/CustomData.d.ts" />
