@@ -1,0 +1,38 @@
+{
+  "name": "@infigo-official/types-for-megascript",
+  "version": "1.0.0",
+  "description": "Type definitions for Megascript Scripting",
+  "types": "v1/index.d.ts",
+  "devDependencies": {
+    "@types/jest": "^29.5.12",
+    "jest": "^29.7.0",
+    "ts-jest": "^29.2.4",
+    "typedoc": "^0.26.6",
+    "typescript": "^5.5.4"
+  },
+  "scripts": {
+    "test": "jest",
+    "docs": "npx typedoc"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Infigo-Official/types-for-megascript.git"
+  },
+  "keywords": [
+    "typedefinitions",
+    "megascript",
+    "infigo"
+  ],
+  "author": "Infigo",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Infigo-Official/types-for-megascript/issues"
+  },
+  "homepage": "https://github.com/Infigo-Official/types-for-megascript#readme",
+  "files": [
+    "v1",
+    "package.json",
+    "README.md",
+    "LICENSE"
+  ]
+}
