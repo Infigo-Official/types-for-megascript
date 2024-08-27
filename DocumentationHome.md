@@ -1,7 +1,7 @@
 ﻿
 # MegaScript Interface Documentation
 
-Documentation for the entire MegaScript engine. Type declarations can be found in the [NPM package](https://www.npmjs.com/package/@infigo/types-for-megascript) and can be used for your TypeScript and JavaScript projects to get full IntelliSense support.
+Documentation for the entire MegaScript engine. Type declarations can be found in the [NPM package]https://www.npmjs.com/package/@infigo-official/types-for-megascript) and can be used for your TypeScript and JavaScript projects to get full IntelliSense support.
 
 ## MegaScript Components
 
