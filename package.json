@@ -1,6 +1,6 @@
 {
   "name": "@infigo-official/types-for-megascript",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Type definitions for Megascript Scripting",
   "types": "v1/index.d.ts",
   "devDependencies": {
