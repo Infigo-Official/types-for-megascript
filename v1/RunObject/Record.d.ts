@@ -48,6 +48,12 @@ interface RecordOrderModel {
     OrderLineItems: MSOrderLineItemModel[];
 
     /**
+     * A list of checkout attributes associated with the order.
+     * Each attribute is represented as a key-value pair.
+     */
+    CheckoutAttributes: RecordOrderKeyValue[];
+
+    /**
      * Additional data associated with the order, stored as key-value pairs where both keys and values are strings.
      */
     ExtraData: { [key: string]: string };
@@ -61,6 +67,12 @@ interface RecordOrderModel {
      * Additional custom data specific to the order.
      */
     CustomData1: string;
+
+    /**
+     * The group ID for the request context, if applicable.
+     * This is an optional field.
+     */
+    RequestContextGroupId?: number;
 }
 
 /**
