@@ -283,3 +283,53 @@ interface SavedQuoteSearch {
      */
     GetAll(): PagedList<SavedQuote>;
 }
+
+/**
+ * Represents the status of a quote.
+ */
+declare enum QuoteStatus {
+    /** The quote is active. */
+    Active = 0,
+
+    /** The quote is inactive. */
+    Inactive = 10,
+
+    /** The quote has been completed. */
+    Completed = 20,
+
+    /** The quote has expired. */
+    Expired = 30,
+
+    /** The quote has been archived. */
+    Archived = 40,
+
+    /** The quote has been deleted. */
+    Deleted = 60
+}
+
+/**
+ * Represents the sorting options for saved quotes.
+ */
+declare enum SavedQuoteOrder {
+    /** Sort by ID. */
+    Id = 1,
+
+    /** Sort by custom reference. */
+    CustomReference = 2,
+
+    /** Sort by created date. */
+    CreatedDate = 3,
+
+    /** Sort by status. */
+    Status = 4,
+
+    /** Sort by amount. */
+    Amount = 5,
+
+    /** Sort by customer ID. */
+    CustomerId = 6,
+
+    /** Sort by name. */
+    Name = 7
+}
+
