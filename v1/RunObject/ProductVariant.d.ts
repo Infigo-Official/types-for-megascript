@@ -68,47 +68,47 @@ interface ProductVariant {
     DisableWishlistButton: boolean;
 
     /**
-     * Indicates whether the price of the product variant is not shown and requires a call for price.
+     * Indicates if "Call for Price" is enabled for the product variant.
      */
     CallForPrice: boolean;
 
     /**
-     * Indicates whether the customer can enter a price for the product variant.
+     * Indicates if the customer can enter the price for the product variant.
      */
     CustomerEntersPrice: boolean;
 
     /**
-     * The minimum price that a customer can enter for the product variant.
+     * The minimum price the customer can enter.
      */
     MinimumCustomerEnteredPrice: number;
 
     /**
-     * The maximum price that a customer can enter for the product variant.
+     * The maximum price the customer can enter.
      */
     MaximumCustomerEnteredPrice: number;
 
     /**
-     * The start date and time when the product variant is available for purchase.
+     * The UTC start date and time when the product is available.
      */
     AvailableStartDateTimeUtc: Date | string | null;
 
     /**
-     * The end date and time when the product variant is available for purchase.
+     * The UTC end date and time when the product is no longer available.
      */
     AvailableEndDateTimeUtc: Date | string | null;
 
     /**
-     * Indicates whether shipping is enabled for the product variant.
+     * Indicates if shipping is enabled for the product variant.
      */
     IsShipEnabled: boolean;
 
     /**
-     * Indicates whether shipping is free for the product variant.
+     * Indicates if the product variant has free shipping.
      */
     IsFreeShipping: boolean;
 
     /**
-     * Additional shipping charge for the product variant.
+     * The additional shipping charge for the product variant.
      */
     AdditionalShippingCharge: number;
 
@@ -133,17 +133,22 @@ interface ProductVariant {
     Height: number;
 
     /**
-     * Indicates whether the product variant is tax exempt.
+     * Indicates if the product variant requires a quote.
+     */
+    RequiresQuote: boolean;
+
+    /**
+     * Indicates if the product variant is tax-exempt.
      */
     IsTaxExempt: boolean;
 
     /**
-     * The tax category identifiers associated with the product variant.
+     * A list of tax category IDs applicable to the product variant.
      */
     TaxCategoryIds: number[];
 
     /**
-     * The method used to manage inventory for the product variant.
+     * The inventory management method for the product variant.
      */
     ManageInventoryMethod: ManageInventoryMethod;
 
@@ -153,27 +158,27 @@ interface ProductVariant {
     StockQuantity: number;
 
     /**
-     * Indicates whether to display the stock quantity for the product variant.
+     * Indicates whether the stock quantity should be displayed.
      */
     DisplayStockQuantity: boolean;
 
     /**
-     * Indicates whether to display the stock availability for the product variant.
+     * Indicates whether stock availability should be displayed.
      */
     DisplayStockAvailability: boolean;
 
     /**
-     * The minimum stock quantity for the product variant.
+     * The minimum stock quantity allowed for the product variant.
      */
     MinStockQuantity: number;
 
     /**
-     * The low stock activity for the product variant.
+     * The low-stock activity configuration for the product variant.
      */
     LowStockActivity: LowStockActivity;
 
     /**
-     * The quantity threshold below which an admin is notified.
+     * The quantity threshold below which the admin should be notified.
      */
     NotifyAdminForQuantityBelow: number;
 
@@ -183,14 +188,19 @@ interface ProductVariant {
     BackorderMode: BackorderMode;
 
     /**
-     * Indicates whether back-in-stock subscriptions are allowed for the product variant.
+     * Indicates whether back-in-stock subscriptions are allowed.
      */
     AllowBackInStockSubscriptions: boolean;
 
     /**
-     * The minimum quantity that a customer can order for the product variant.
+     * The minimum order quantity for the product variant.
      */
     OrderMinimumQuantity: number;
+
+    /**
+     * The default quantity for the product variant when added to the order.
+     */
+    DefaultQuantity: number;
 
     /**
      * The pack quantity for ordering the product variant.
@@ -198,60 +208,76 @@ interface ProductVariant {
     OrderPackQuantity: number;
 
     /**
-     * The maximum quantity that a customer can order for the product variant.
+     * The maximum order quantity for the product variant.
      */
     OrderMaximumQuantity: number;
 
     /**
-     * Tier prices associated with the product variant.
+     * The quantity selector mode for the product variant.
+     */
+    QuantitySelectorMode: number;
+
+    /**
+     * A list of tier prices for the product variant.
      */
     TierPrices: TierPrice[];
 
     /**
-     * Indicates whether the product variant has quantity-based pricing.
+     * Indicates if quantity-based pricing is enabled.
      */
-    HasQuantityBasedPricing: boolean | null;
+    HasQuantityBasedPricing?: boolean;
 
     /**
-     * Indicates whether to use multi-tier pricing for the product variant.
+     * Indicates whether multi-tier spread pricing is used.
      */
     UseMultiTierSpread: boolean;
 
     /**
-     * Indicates whether to use interpolation for tier pricing of the product variant.
+     * Indicates whether interpolation is used for tier pricing.
      */
     UseInterpolationForTierPricing: boolean;
 
     /**
-     * Indicates whether to show the order line total for the product variant.
+     * Indicates if the order line total should be shown.
      */
     ShowOrderlineTotal: boolean;
 
     /**
-     * Discounts applicable to the product variant.
+     * A list of discounts associated with the product variant.
      */
     Discounts: ProductVariantDiscount[];
 
     /**
-     * External identifiers associated with the product variant.
+     * A list of external IDs for the product variant.
      */
     ExternalIds: ExternalId[];
 
     /**
-     * Attributes of the product variant.
+     * A list of product attributes for the product variant.
      */
     Attributes: ProductAttribute[];
 
     /**
-     * Delivery types for the product variant.
+     * The delivery types associated with the product variant.
      */
-    DeliveryType: ProductDeliveryType[];
+    DeliveryType: string[];
 
     /**
-     * Indicates whether the asset associated with the product variant can be downloaded.
+     * Indicates whether the product asset can be downloaded.
      */
-    CanDownloadAsset: boolean | null;
+    CanDownloadAsset?: boolean;
+
+    /**
+     * The description of the product variant.
+     */
+    Description: string;
+
+    /**
+     * The admin comment for the product variant.
+     */
+    AdminComment: string;
 }
+
 
 /**
  * Represents a product variant interface.

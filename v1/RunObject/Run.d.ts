@@ -201,6 +201,26 @@ interface Run {
     * @param count - The count of items to include in the statistics.
     */
    SymphonyStatsStop(count: number): void;
+
+   /**
+    * The saved quotes object.
+    */
+   SavedQuotes: SavedQuotes;
+   
+   /**
+    * The reporting object.
+    */
+   Reporting: Reporting;
+   
+   /**
+   * The price helper object.
+   */
+   DateTime: DateTime;
+   
+   /**
+   * The price helper object.
+   */
+   PriceHelper: PriceHelper;
 }
 
 /**

@@ -88,6 +88,9 @@ interface ShoppingCartItemObject {
     /** The linked job object associated with the shopping cart item. */
     LinkedJob: LinkedJobObject;
 
+    /** The quote ID associated with the shopping cart item. */
+    QuoteId: number;
+
     /**
      * Sets additional data for the shopping cart item.
      * @param key The key of the data to set.
@@ -173,6 +176,12 @@ interface AddToBasketObjectInstance {
      * e.g., shopping cart, wishlist.
      */
     Type: MsShoppingCartItemType;
+    
+    /**
+     * The ID of the saved quote associated with the basket item.
+     * This is used to associate a basket item with a saved quote.
+     */
+    SavedQuoteId?: number;
 }
 
 /**

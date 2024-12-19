@@ -16,6 +16,18 @@ interface ConfigurationsObject {
      * @returns The value of the specified setting, or null if not found.
      */
     GetSetting: (groupName: string, settingName: string) => string | null;
+    
+    /**
+     * Retrieves the store's billing address.
+     * @returns A SimpleObject containing the store billing address details, or null if not available.
+     */
+    GetStoreBillingAddress(): Address | null;
+
+    /**
+     * Retrieves the default country ISO code.
+     * @returns The two-letter ISO code of the default country, or an empty string if not set.
+     */
+    GetDefaultCountryIsoCode(): string;
 }
 
 /**

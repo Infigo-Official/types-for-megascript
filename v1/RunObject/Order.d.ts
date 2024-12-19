@@ -467,7 +467,7 @@ declare enum OrderOrderBy {
 /**
  * Enum defining direction for ordering orders.
  */
-declare enum OrderOrderDirection {
+declare enum OrderDirection {
     /**
      * Sort orders in ascending order (oldest to newest or alphabetically A to Z).
      */
