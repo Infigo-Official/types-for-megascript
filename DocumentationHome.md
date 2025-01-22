@@ -56,3 +56,4 @@ Documentation for the entire MegaScript engine. Type declarations can be found i
 - **HelperObject**: Provides a variety of utility methods for common tasks such as validation, encryption, and data manipulation.
 - **Logger**: Manages logging within MegaScript, providing methods to log messages, errors, and other runtime information.
 - **Tools**: Provides a set of tools and utilities for various tasks within MegaScript, including string manipulation, data formatting, and more.
+- **LockerObject**: Manages execution of actions within a locking mechanism, ensuring thread safety and retry logic. Provides methods to execute locked actions with configurable parameters.
