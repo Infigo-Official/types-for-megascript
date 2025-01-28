@@ -20,6 +20,15 @@ interface PdfInstance {
     CreateLayer: (name: string, visible?: boolean, intent?: number) => PdfLayer;
 
     /**
+     * Applies a profile to the PDF instance.
+     * @param profileName The name of the profile to apply.
+     * @param variablePlaceholder An object containing placeholders for variables to be replaced in the profile.
+     * @returns An `ApplyProfileResult` containing the result of the profile application, including success status, output, and an optional report.
+     */
+    ApplyProfile: (profileName: string, variablePlaceholder: object) => ApplyProfileResult;
+
+
+    /**
      * Gets the layer at the specified index.
      * @param index The index of the layer.
      * @returns The layer object at the specified index.
@@ -463,6 +472,25 @@ interface PdfLayer{
     Layer: PdfLayer;
 }
 
+/**
+ * Represents the result of applying a profile to a PDF.
+ */
+interface ApplyProfileResult {
+    /**
+     * Indicates whether the profile was successfully applied.
+     */
+    Success: boolean;
+
+    /**
+     * The output PDF instance object after applying the profile.
+     */
+    Output: PdfInstance;
+
+    /**
+     * The report PDF instance object generated during the profile application, if available.
+     */
+    Report: PdfInstance | null;
+}
 
 /**
  * Represents a PdfImageObject with methods and properties for PDF image operations.
