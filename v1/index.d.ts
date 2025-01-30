@@ -4,6 +4,7 @@
 /// <reference path="RunObject/Budgets.d.ts" />
 /// <reference path="RunObject/Cart.d.ts" />
 /// <reference path="RunObject/Context.d.ts" />
+/// <reference path="RunObject/Countries.d.ts" />
 /// <reference path="RunObject/CustomData.d.ts" />
 /// <reference path="RunObject/Customer.d.ts" />
 /// <reference path="RunObject/Database.d.ts" />
