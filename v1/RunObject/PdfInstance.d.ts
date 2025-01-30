@@ -256,6 +256,11 @@ interface PdfInstance {
      * @returns The extracted text.
      */
     ExtractText: (asFormated: boolean) => string;
+
+    /**
+     * Disposes of the PDF instance, ensuring proper cleanup of memory and resources.
+     */
+    Dispose: () => void;
 }
 
 /**
@@ -523,26 +528,6 @@ interface Rectangle {
     Y: number;
     Width: number;
     Height: number;
-}
-
-/**
- * Represents a PdfLayerObject with properties and methods for PDF layer operations.
- */
-interface PdfLayer {
-    /**
-     * Gets the name of the PdfLayerObject.
-     */
-    name: string;
-
-    /**
-     * Gets or sets whether the PdfLayerObject is visible.
-     */
-    visible: boolean;
-
-    /**
-     * Gets the PdfLayer instance.
-     */
-    layer: PdfLayer;
 }
 
 /**

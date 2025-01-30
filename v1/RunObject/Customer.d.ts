@@ -438,8 +438,10 @@ interface CustomerSearch {
 
     /**
      * Filters customers by department in the search context.
+     * @param id The unique identifier of the department to filter customers by.
+     * @returns The updated search context including only customers from the specified department.
      */
-    InDepartment: () => CustomerSearch;
+    InDepartment: (id: number) => CustomerSearch;
 
     /**
      * Filters customers by role in the search context.
@@ -502,8 +504,43 @@ interface CustomerSearch {
      * Loads all customers with detailed information.
      */
     GetAllDetailed: () => PagedList<Customer>;
+
+    /**
+     * Filters customers by a list of unique identifiers.
+     * @param ids An array of customer IDs to filter by.
+     * @returns The updated search context including only the specified customer IDs.
+     */
+    InIds: (ids: number[]) => CustomerSearch;
+    
+    /**
+     * Filters customers based on a search term and search column.
+     * @param term The search term.
+     * @param searchTermColumn The column to search in.
+     * @param searchParam Optional. The type of search to perform (exact or contains). Defaults to exact.
+     * @returns The updated search context.
+     */
+    InTerms: (term: string, searchTermColumn: CustomerSearchTermProperty, searchType?: SearchParam) => CustomerSearch;
 }
 
+/**
+ * Enum representing properties available for customer search.
+ */
+declare enum CustomerSearchTermProperty {
+    /** Search by name. */
+    Name = 1,
+    /** Search by custom reference. */
+    CustomReference = 2,
+    /** Search by first name. */
+    FirstName = 3,
+    /** Search by last name. */
+    LastName = 4,
+    /** Search by email. */
+    Email = 5,
+    /** Search by username. */
+    Username = 6,
+    /** Search by company. */
+    Company = 7
+}
 
 /**
  * Represents a department.

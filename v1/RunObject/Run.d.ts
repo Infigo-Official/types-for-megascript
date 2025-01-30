@@ -221,6 +221,11 @@ interface Run {
    * The price helper object.
    */
    PriceHelper: PriceHelper;
+
+   /**
+    * Provides access to country-related operations.
+    */
+   Countries: Countries;
 }
 
 /**

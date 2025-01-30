@@ -131,6 +131,15 @@ interface DataItemObject extends OrderProductVariant {
      * The size of the order item set.
      */
     OrderItemsSetSize: number;
+
+    /** Billing address for the order. */
+    Billing: Address;
+
+    /** Shipping address for the order. */
+    Shipping: Address;
+
+    /** Shipping method used for the order. */
+    ShippingMethod: string;
 }
 
 /**
