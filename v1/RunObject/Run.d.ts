@@ -128,6 +128,11 @@ interface Run {
    PdfHelper: PdfGeneralObject;
 
    /**
+    * Locker object used to manage execution of actions within a locking mechanism.
+    */
+   Locker: LockerObject;
+
+   /**
     * Generates a MegaScript link with specified parameters.
     * @param parameters - Parameters for the MegaScript link.
     * @param additionalParameters - Additional parameters for the MegaScript link.
