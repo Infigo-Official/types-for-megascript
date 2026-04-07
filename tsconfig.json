@@ -7,6 +7,8 @@
     "entryPoints": ["./v1"],
     "entryPointStrategy": "expand",
     "out": "docs",
+    "json": "docs/documentation.json",
+    "emit": "both",
     "disableSources": true,
     "readme": "DocumentationHome.md",
     "excludePrivate": true,
