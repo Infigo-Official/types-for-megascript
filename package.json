@@ -1,6 +1,6 @@
 {
   "name": "@infigo-official/types-for-megascript",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "Type definitions for Megascript Scripting",
   "types": "v1/index.d.ts",
   "devDependencies": {
@@ -12,7 +12,7 @@
   },
   "scripts": {
     "test": "jest",
-    "docs": "npx typedoc"
+    "docs": "npx typedoc && node scripts/generate-rag.js"
   },
   "repository": {
     "type": "git",
