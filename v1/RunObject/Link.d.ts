@@ -37,6 +37,31 @@ interface Links {
      * @returns A string indicating the impersonation status.
      */
     CanImpersonate: (customerObj: Customer | number) => string;
+
+    /**
+     * Performs an outbound HTTP request. The target host must be whitelisted in the storefront's allowed hosts for MegaScript, otherwise a 403 response is returned.
+     *
+     * @param url - The absolute URL to request.
+     * @param method - The HTTP method. "POST" sends the content body; any other value performs a GET-style download.
+     * @param headers - An object of request headers (key/value pairs), or null.
+     * @param content - The request body, used for POST requests.
+     * @returns The web response.
+     */
+    WebRequest: (url: string, method: string, headers: object | null, content: object) => MSApiWebResponse;
+}
+
+/**
+ * Represents the response of an outbound HTTP request made via Links.WebRequest.
+ */
+interface MSApiWebResponse {
+    /** The response body content. */
+    Content: string;
+    /** The value of the response Content-Type header. */
+    ContentType: string;
+    /** The HTTP status code of the response. */
+    StatusCode: number;
+    /** The response headers as key/value pairs. */
+    Headers: { [key: string]: string };
 }
 
 /**

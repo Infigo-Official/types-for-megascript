@@ -203,7 +203,78 @@ interface Order {
      * @param displayToCustomer Optional. Indicates whether the note should be displayed to the customer.
      * @returns A boolean indicating success or failure of adding the note.
      */
-    AddOrderNotes: (note: string, displayToCustomer?: boolean) => boolean;
+    AddOrderNote: (note: string, displayToCustomer?: boolean) => boolean;
+
+    /** Per-rate tax breakdown for the order, keyed by tax rate. */
+    TaxRates: { [rate: string]: number };
+
+    /** The total tax on the order. */
+    OrderTax: number;
+
+    /** Order shipping cost excluding tax. */
+    OrderShippingExclTax: number;
+
+    /** Order shipping cost including tax. */
+    OrderShippingInclTax: number;
+
+    /** The order total. */
+    OrderTotal: number;
+
+    /** The purchase order number. */
+    PurchaseOrderNumber: string;
+
+    /** The payment method system name. */
+    PaymentMethodSystemName: string;
+
+    /** The capture transaction ID. */
+    CaptureTransactionId: string;
+
+    /** The authorization transaction ID. */
+    AuthorizationTransactionId: string;
+
+    /** The customer currency code. */
+    CustomerCurrencyCode: string;
+
+    /** The total order weight. */
+    OrderWeight: number;
+
+    /** Order subtotal including tax. */
+    OrderSubtotalInclTax: number;
+
+    /** Order subtotal excluding tax. */
+    OrderSubtotalExclTax: number;
+
+    /**
+     * Ships the order (notifies customer and MIS).
+     * @returns True if the order was shipped successfully, otherwise false.
+     */
+    ShipOrder: () => boolean;
+
+    /**
+     * Marks the order as delivered (notifies customer).
+     * @returns True if the order was marked delivered successfully, otherwise false.
+     */
+    DeliverOrder: () => boolean;
+
+    /**
+     * Gets (or creates) the split-shipping envelope for the order.
+     * @returns The split-shipping envelope, or null when the order has none.
+     */
+    GetSplitShipping: () => any | null;
+
+    /**
+     * Updates a split-shipment payment from a key/value map.
+     * @param keyValues The split-shipment payment fields to update.
+     * @returns A result object indicating success or failure.
+     */
+    UpdateSplitShipmentPayment: (keyValues: object) => ResultObject;
+
+    /**
+     * Updates a split-shipment delivery from a key/value map.
+     * @param keyValues The split-shipment delivery fields to update.
+     * @returns A result object indicating success or failure.
+     */
+    UpdateSplitShipmentDelivery: (keyValues: object) => ResultObject;
 }
 
 /**
@@ -281,6 +352,21 @@ interface Orders {
         exactMatch: boolean,
         orderAscending: boolean
     ) => PagedList<OrderProductVariant>;
+
+    /**
+     * Imports a historical (already-fulfilled) order. Idempotent: re-importing an order that
+     * matches an existing ExternalOrderId/OrderGuid returns the existing order rather than creating a duplicate.
+     * @param order The historical order request.
+     * @returns The result of the import, including whether the order already existed.
+     */
+    ImportHistoricalOrder: (order: object) => HistoricalOrderResult;
+
+    /**
+     * Retrieves order product variant details matching a details filter, as a paged list.
+     * @param filter The order-product-variant details filter (custom tag / custom data / extra data criteria and paging).
+     * @returns A paged list of order product variant details.
+     */
+    GetByDetailsFilter: (filter: object) => PagedList<OrderProductVariantDetails>;
 }
 
 /**
@@ -293,6 +379,20 @@ interface OrderSearch {
      * @returns The updated order search object.
      */
     WithOrderStatus: (status: string) => OrderSearch;
+
+    /**
+     * Excludes orders that have the given status. May be called multiple times to exclude several statuses.
+     * @param status The order status to exclude.
+     * @returns The updated order search object.
+     */
+    WithoutOrderStatus: (status: string) => OrderSearch;
+
+    /**
+     * Filters orders that contain at least one line item for any of the given product IDs.
+     * @param productIds The product IDs to match against order line items.
+     * @returns The updated order search object.
+     */
+    WithLineItemProductIds: (productIds: number[]) => OrderSearch;
 
     /**
      * Filters orders by their shipping status.
@@ -335,6 +435,20 @@ interface OrderSearch {
      * @returns The updated order search object.
      */
     Until: (until: Date) => OrderSearch;
+
+    /**
+     * Filters orders dispatched on or after the given date (compared in UTC).
+     * @param since The date from which orders should be included by dispatch date.
+     * @returns The updated order search object.
+     */
+    DispatchSince: (since: Date) => OrderSearch;
+
+    /**
+     * Filters orders dispatched on or before the given date (compared in UTC).
+     * @param until The date up to which orders should be included by dispatch date.
+     * @returns The updated order search object.
+     */
+    DispatchUntil: (until: Date) => OrderSearch;
 
     /**
      * Specifies what additional order data to load.
@@ -526,4 +640,67 @@ interface Date {
      * @returns A number if 'hint' was "number", a string if 'hint' was "string" or "default".
      */
     [Symbol.toPrimitive](hint: string): string | number;
+}
+
+/**
+ * Result of a historical order import. Unlike the generic Result, it also reports
+ * AlreadyImported so an idempotent re-run (existing order returned) can be told
+ * apart from a newly created order — both report Success = true.
+ */
+interface HistoricalOrderResult {
+    /** The Catfish order ID of the imported (or existing) order, or 0 on failure. */
+    Id: number;
+
+    /** Indicates whether the import operation succeeded. */
+    Success: boolean;
+
+    /** True when the order already existed (matched ExternalOrderId/OrderGuid) and no duplicate was created. */
+    AlreadyImported: boolean;
+
+    /** The GUID of the imported (or existing) order. */
+    OrderGuid: string;
+
+    /** Error messages produced during the import. */
+    Errors: string[];
+
+    /** Non-blocking warnings, e.g. supplied financial totals that disagree with values computed from lines. */
+    Warnings: string[];
+}
+
+/**
+ * Details of an order product variant returned by Orders.GetByDetailsFilter.
+ */
+interface OrderProductVariantDetails {
+    /** The order product variant ID. */
+    Id: number;
+
+    /** The ID of the order this line item belongs to. */
+    OrderId: number;
+
+    /** The ID of the customer who placed the order. */
+    CustomerId: number;
+
+    /** The display name of the customer who placed the order. */
+    CustomerName: string;
+
+    /** Custom data field 1 for the line item (populated only when requested in the filter). */
+    CustomData1: string;
+
+    /** Custom data field 2 for the line item (populated only when requested in the filter). */
+    CustomData2: string;
+
+    /** Custom tag 1 for the line item. */
+    CustomTag1: string;
+
+    /** Custom tag 2 for the line item. */
+    CustomTag2: string;
+
+    /** Custom tag 3 for the line item. */
+    CustomTag3: string;
+
+    /** Custom tag 4 for the line item. */
+    CustomTag4: string;
+
+    /** Extra data key-value pairs for the line item (populated only when requested in the filter). */
+    ExtraData: { [key: string]: string } | null;
 }

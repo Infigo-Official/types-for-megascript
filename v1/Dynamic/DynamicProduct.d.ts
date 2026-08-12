@@ -42,6 +42,12 @@ interface DynamicProduct {
     PrepareAppearance(): boolean;
 
     /**
+     * Prepares the appearance of the dynamic product using default dimensions with verbose logging enabled.
+     * @returns {boolean} Returns true if the appearance was successfully prepared, false otherwise.
+     */
+    PrepareAppearanceVerbose(): boolean;
+
+    /**
      * Impresses the dynamic product onto a specified file.
      * This typically involves generating a file with the product's content.
      * @param fileInstance - The target file instance where the product will be impressed.
@@ -97,6 +103,27 @@ interface DynamicProduct {
      * @returns {DynamicFieldModel} An object containing detailed information about the specified field.
      */
     GetFieldDetails(fieldName: string): DynamicFieldModel;
+
+    /**
+     * Stores a script-data value under the given key. The value is merged into the instance's script data before appearance preparation and impression.
+     * @param key - The script-data key (must be non-empty).
+     * @param value - The value to store (must not be null).
+     */
+    SetScriptData(key: string, value: any): void;
+
+    /**
+     * Retrieves a previously stored script-data value by key.
+     * @param key - The script-data key (must be non-empty).
+     * @returns The stored value as an object, or null if no value is stored for the key.
+     */
+    GetScriptData(key: string): Object | null;
+
+    /**
+     * Retrieves the names of the fields on the specified page.
+     * @param pageIndex - The index of the page to read field names from.
+     * @returns An array of field names, or null if the product is not loaded.
+     */
+    GetFieldsFromPage(pageIndex: number): string[] | null;
 
     /**
      * Indicates whether the dynamic product is currently loaded.

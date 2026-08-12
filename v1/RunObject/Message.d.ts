@@ -39,6 +39,14 @@ interface MessageHandlerObject {
      * @returns The shipping recipient object containing recipient details.
      */
     GetShippingRecipient: (orderId: number) => Recipient;
+
+    /**
+     * Writes an entry to the platform log.
+     * @param msg The short message to log (objects are stringified).
+     * @param type The log level: "Error", "Setup", "Warning", "Usage", "Debug", or "Info" (default). Unrecognized values are treated as "Info".
+     * @param longMessage The full/long message body for the log entry.
+     */
+    Log: (msg: any, type: string, longMessage: any) => void;
 }
 
 /**

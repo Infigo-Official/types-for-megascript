@@ -362,6 +362,13 @@ interface Customers {
      * @returns An object representing the department associated with the customer.
      */
     GetDepartment: (customerId: number) => Department;
+
+    /**
+     * Retrieves the checkout attributes configured on a customer.
+     * @param customer The customer to read checkout attributes from (must have a valid Id).
+     * @returns An array of the customer's checkout attributes; empty if the customer has none or is not found.
+     */
+    GetCustomerCheckoutAttributes: (customer: Customer) => MsCheckoutAttribute[];
 }
 
 
@@ -423,6 +430,26 @@ interface CustomerSearch {
      * Includes inactive customers in the search context.
      */
     IncludeInactive: () => CustomerSearch;
+
+    /**
+     * Includes guest customers in the search results. By default guests are excluded.
+     * @returns The updated search context.
+     */
+    IncludeGuests: () => CustomerSearch;
+
+    /**
+     * Filters customers by whether they have a MIS external reference.
+     * @param hasExternalRef True to return only customers that have an external reference; false for only those without.
+     * @returns The updated search context.
+     */
+    HasExternalRef: (hasExternalRef: boolean) => CustomerSearch;
+
+    /**
+     * Filters customers by whether they have placed any orders.
+     * @param hasOrders True to return only customers with at least one order; false for only those with none.
+     * @returns The updated search context.
+     */
+    HasOrders: (hasOrders: boolean) => CustomerSearch;
 
     /**
      * Sets the page index for pagination in the search context.
@@ -504,6 +531,13 @@ interface CustomerSearch {
      * Loads all customers with detailed information.
      */
     GetAllDetailed: () => PagedList<Customer>;
+
+    /**
+     * Executes the search and returns a lightweight projection of the matching customers.
+     * If no LoadXxx data was requested, all available fields are loaded.
+     * @returns A paged list of lightweight customer records.
+     */
+    GetAll: () => PagedList<MsCustomer>;
 
     /**
      * Filters customers by a list of unique identifiers.
@@ -616,5 +650,36 @@ interface MSAccessPermissionLoadContext {
      * Specifies what product variant details to load.
      */
     ProductVariant: ProductVariantLoadType;
+}
+
+/**
+ * Lightweight customer projection returned by CustomerSearch.GetAll.
+ */
+interface MsCustomer {
+    /** The unique identifier of the customer. */
+    Id: number;
+
+    /** The email address of the customer (populated when email data is loaded). */
+    Email: string;
+
+    /** The username of the customer (populated when username data is loaded). */
+    UserName: string;
+
+    /** The name of the customer's department (populated when department data is loaded). */
+    DepartmentName: string;
+
+    /** The identifier of the customer's department, or null if none (populated when department data is loaded). */
+    DepartmentId: number | null;
+}
+
+/**
+ * A checkout attribute name-value pair configured on a customer.
+ */
+interface MsCheckoutAttribute {
+    /** The name of the checkout attribute. */
+    Name: string;
+
+    /** The value of the checkout attribute. */
+    Value: string;
 }
 

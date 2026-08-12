@@ -14,6 +14,14 @@ interface PriceHelper {
      * priceHelper.FormatCurrency(numberInstance); // "$1,234.57"
      */
     FormatCurrency(numberInstance: NumberInstance): string;
+
+    /**
+     * Returns the currency symbol for a currency code.
+     * @param currencyCode The ISO currency code (e.g. "USD", "GBP").
+     * @returns The currency symbol, an empty string if the code is empty,
+     * or the original code if the currency is not found.
+     */
+    GetCurrencySymbol(currencyCode: string): string;
 }
 
 /**
