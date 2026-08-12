@@ -66,6 +66,16 @@ interface CustomDataCategoryObjects {
      * @param callback - Callback function that receives the paged list of key-value pairs.
      */
     SearchPaged: (filter: CustomDataSearchObject, callback: (data: PagedList<KeyValue<string, object>>) => void) => void;
+
+    /**
+     * Computes a numeric aggregation over a field across the items in a custom data category, optionally filtered.
+     *
+     * @param categoryOrId - Category ID or custom data category object.
+     * @param fieldName - The name of the field to aggregate.
+     * @param filterGroupObj - Optional filter group used to restrict which items are aggregated. Pass null to aggregate over all items.
+     * @param callback - Callback that receives an object mapping aggregation keys to their numeric values.
+     */
+    GetFieldAggregation: (categoryOrId: number | CustomDataCategoryObject, fieldName: string, filterGroupObj: object | null, callback: (result: { [key: string]: number }) => void) => void;
 }
 
 
@@ -117,6 +127,11 @@ interface CustomDataSearchObject {
      * The sort direction to apply to the search results (e.g. "asc" or "desc").
      */
     SortDirection: string;
+
+    /**
+     * Optional root filter group applied to the search. Represents a (nested) group of field filters.
+     */
+    RootFilterGroup: object;
 }
 
 /**

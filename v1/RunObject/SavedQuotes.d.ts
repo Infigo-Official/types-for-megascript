@@ -58,6 +58,21 @@ interface SavedQuote {
     JobPrice: number;
 
     /**
+     * The unit price of the saved quote excluding any markup.
+     */
+    UnitPriceWithoutMarkup: number;
+
+    /**
+     * The total price of the saved quote (final price across the quantity).
+     */
+    TotalPrice: number;
+
+    /**
+     * The total price of the saved quote excluding any markup (unit-without-markup times quantity).
+     */
+    TotalPriceWithoutMarkup: number;
+
+    /**
      * Determines whether the saved quote is hidden from the customer.
      */
     HideFromCustomer: boolean;
@@ -186,6 +201,15 @@ interface SavedQuotes {
     GetTheActualPrice(quote: SavedQuote): number;
 
     /**
+     * Retrieves the uploaded file for a file-upload product attribute on a saved quote.
+     * @param quote - The saved quote to read the attribute file from.
+     * @param fileGuid - The GUID of the uploaded file.
+     * @param attributeId - The product attribute identifier (must be greater than 0).
+     * @returns The file instance, or null if the attribute or file cannot be resolved.
+     */
+    GetFileUploadAttributeFile(quote: SavedQuote, fileGuid: string, attributeId: number): FileInstance | null;
+
+    /**
      * Builds a human-readable string for validation errors.
      * @param validationErrors - The validation errors object.
      * @returns A string representing the formatted validation errors.
@@ -248,6 +272,13 @@ interface SavedQuoteSearch {
      * @returns The updated search instance.
      */
     CreatedByCustomer(customerId: number | undefined): SavedQuoteSearch;
+
+    /**
+     * Filters results to include only quotes belonging to customers in the given department.
+     * @param departmentName - The department name to filter by.
+     * @returns The updated search instance.
+     */
+    ByCustomerDepartment(departmentName: string): SavedQuoteSearch;
 
     /**
      * Filters results to include only parent quotes.

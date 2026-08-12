@@ -53,6 +53,51 @@ interface Run {
    Jobs: Jobs;
 
    /**
+    * Delivery lead-time / available-dates operations.
+    */
+   Delivery: DeliveryObject;
+
+   /**
+    * Supplier best-match and lookup operations.
+    */
+   Suppliers: SuppliersObject;
+
+   /**
+    * Zip/archive creation operations.
+    */
+   Zip: ZipObject;
+
+   /**
+    * Cryptographic hashing helpers.
+    */
+   Cryptography: CryptographyObject;
+
+   /**
+    * Transaction-id based payment operations (toggle-gated).
+    */
+   Payment: PaymentObject;
+
+   /**
+    * Access to global (storefront/platform) additional-data files.
+    */
+   GlobalAdditionalData: GlobalAdditionalDataObject;
+
+   /**
+    * Input parameters passed into this MegaScript execution.
+    */
+   Input: InputOutputParameterObject;
+
+   /**
+    * Output parameters produced by this MegaScript execution.
+    */
+   Output: InputOutputParameterObject;
+
+   /**
+    * Symphony item group querying and management operations.
+    */
+   SymphonyItemGroups: SymphonyItemGroups;
+
+   /**
     * Database operations within the run.
     */
    Database: Database;

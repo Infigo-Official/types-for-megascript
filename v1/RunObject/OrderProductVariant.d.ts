@@ -214,10 +214,21 @@ interface OrderProductVariant {
     ExtraData: { [key: string]: string };
 
     /**
+     * The UTC date and time when the order product variant was created.
+     */
+    CreatedOnUtc: Date;
+
+    /**
      * Gets the email address of the customer who placed the order for this item.
      * @returns The customer's email address, or null if the item cannot be found.
      */
     GetCustomerEmail: () => string;
+
+    /**
+     * Retrieves the job output file associated with the order product variant.
+     * @returns The job output file instance, or null if no output file path is available.
+     */
+    GetJobOutputFile: () => FileInstance;
 
     /**
      * Retrieves the output file associated with the order product variant.

@@ -27,6 +27,60 @@ interface PdfInstance {
      */
     ApplyProfile: (profileName: string, variablePlaceholder: object) => ApplyProfileResult;
 
+    /**
+     * Downsamples the images in the PDF via the PDF optimization service and returns the
+     * downsampled copy as a new file.
+     * @param options Downsampling DPI targets. All fields optional (defaults 150 DPI).
+     * @returns A result object with the downsampled output file, or errors on failure.
+     */
+    DownsamplePdf: (options?: PdfDownsampleOptions) => PdfProcessingResult;
+
+    /**
+     * Applies an ICC colour profile to the PDF and returns the converted copy as a new file.
+     * @param iccProfile The ICC profile file to apply. Must exist.
+     * @param config ICC conversion settings. All fields optional.
+     * @returns A result object with the converted output file, or errors on failure.
+     */
+    ApplyICCProfile: (iccProfile: FileInstance, config?: PdfIccProfileOptions) => PdfProcessingResult;
+
+    /**
+     * Converts the PDF to a target device colour space using the given colour profile.
+     * @param colorProfile The colour profile file to use. Must exist.
+     * @param options Colour-space conversion settings. All fields optional.
+     * @returns A result object with the converted output file, or errors on failure.
+     */
+    ConvertToColorSpace: (colorProfile: FileInstance, options?: PdfColorSpaceConversionOptions) => PdfProcessingResult;
+
+    /**
+     * Applies selective grayscale conversion to the PDF and returns the result as a new file.
+     * @param options Selective grayscale settings. All fields optional.
+     * @returns A result object with the grayscaled output file, or errors on failure.
+     */
+    Grayscale: (options?: PdfSelectiveGrayscaleOptions) => PdfProcessingResult;
+
+    /**
+     * Splits the document (including unsaved in-memory changes) into one PDF per page-split
+     * definition. Invalid definitions fail the whole call with no partial output.
+     * @param splits An array of page-split info objects describing each output document.
+     * @returns A result object with the per-split output files, or a failure message.
+     */
+    Split: (splits: object) => PageSplitResult;
+
+    /**
+     * Rasterizes every page of the PDF to a thumbnail image and returns the generated image files.
+     * @param options Rasterization settings. All fields optional.
+     * @returns A result object with the generated thumbnail files, or errors on failure.
+     */
+    RasterizeThumbnails: (options?: PdfRasterizeOptions) => PdfThumbnailsResult;
+
+    /**
+     * Rasterizes a single page of the PDF to a thumbnail image.
+     * @param pageIndex The zero-based index of the page to rasterize.
+     * @param options Rasterization settings. All fields optional.
+     * @returns A result object with the generated thumbnail file, or errors on failure.
+     */
+    RasterizeThumbnailPage: (pageIndex: number, options?: PdfRasterizeOptions) => PdfProcessingResult;
+
 
     /**
      * Gets the layer at the specified index.
@@ -344,6 +398,44 @@ interface PdfPage {
     SaveAsImage: (target: FileInstance, width: number, type: string, bgColor?: string) => boolean;
 
     /**
+     * Saves the page as an image, fitting it to the given width and height box.
+     * @param target The file instance to save the image to.
+     * @param width The target width of the image.
+     * @param height The target height of the image.
+     * @param type The image type ("Jpeg", "Png", or "Tiff"). Defaults to "Jpeg" when empty.
+     * @param bgColor Optional. The background colour as an HTML hex string (e.g. "#FFFFFF").
+     * @returns `true` if the save was successful, otherwise `false`.
+     */
+    SaveAsImageFit: (target: FileInstance, width: number, height: number, type: string, bgColor?: string) => boolean;
+
+    /**
+     * Saves the page as an image fitted to a width/height box, with an explicit JPEG quality.
+     * @param target The file instance to save the image to.
+     * @param width The target width of the image.
+     * @param height The target height of the image.
+     * @param type The image type ("Jpeg", "Png", or "Tiff"). Defaults to "Jpeg" when empty.
+     * @param bgColor The background colour as an HTML hex string (e.g. "#FFFFFF"). May be null/empty.
+     * @param jpegQuality The JPEG quality (1-100); ignored for non-JPEG formats.
+     * @returns `true` if the save was successful, otherwise `false`.
+     */
+    SaveAsImageFitWithQuality: (target: FileInstance, width: number, height: number, type: string, bgColor: string, jpegQuality: number) => boolean;
+
+    /**
+     * Saves the page as an image fitted to a width/height box, rendering at a supersampled
+     * resolution and downscaling for higher quality. Supersampling only applies when a height
+     * is supplied and supersample > 1.
+     * @param target The file instance to save the image to.
+     * @param width The target width of the image.
+     * @param height The target height of the image.
+     * @param type The image type ("Jpeg", "Png", or "Tiff"). Defaults to "Jpeg" when empty.
+     * @param bgColor The background colour as an HTML hex string (e.g. "#FFFFFF"). May be null/empty.
+     * @param jpegQuality The JPEG quality (1-100); ignored for non-JPEG formats.
+     * @param supersample The supersampling multiplier (>= 1); higher values render larger then downscale.
+     * @returns `true` if the save was successful, otherwise `false`.
+     */
+    SaveAsImageFitSupersample: (target: FileInstance, width: number, height: number, type: string, bgColor: string, jpegQuality: number, supersample: number) => boolean;
+
+    /**
      * Optimizes the page by reducing the size of images.
      * @param maxImageDimension The maximum dimension for images.
      * @param jpegQuality The quality of JPEG images.
@@ -585,4 +677,119 @@ interface IPdfMetaData {
      * Gets or sets custom values associated with the PDF document.
      */
     CustomValues: string;
+}
+
+/**
+ * Result of a PDF processing operation that produces a single output file
+ * (DownsamplePdf, ApplyICCProfile, ConvertToColorSpace, Grayscale, RasterizeThumbnailPage).
+ */
+interface PdfProcessingResult {
+    /** Indicates whether the operation succeeded. */
+    Success: boolean;
+
+    /** The output file produced by the operation, or null on failure. */
+    Output: FileInstance | null;
+
+    /** Any error messages produced by the operation. Empty when successful. */
+    Errors: string[];
+}
+
+/**
+ * Result of a PDF operation that produces multiple output files (RasterizeThumbnails).
+ */
+interface PdfThumbnailsResult {
+    /** Indicates whether the operation succeeded and produced at least one file. */
+    Success: boolean;
+
+    /** The generated output files. Empty on failure. */
+    Outputs: FileInstance[];
+
+    /** Any error messages produced by the operation. Empty when successful. */
+    Errors: string[];
+}
+
+/**
+ * Result of splitting a PDF into multiple documents.
+ */
+interface PageSplitResult {
+    /** Indicates whether the split succeeded. */
+    Success: boolean;
+
+    /** A human-readable message, populated with error detail when the split fails. */
+    Message: string;
+
+    /** The output PDF files, one per page-split definition. Empty on failure. */
+    Files: FileInstance[];
+}
+
+/**
+ * Options for {@link PdfInstance.DownsamplePdf}. All fields optional.
+ */
+interface PdfDownsampleOptions {
+    /** Target DPI for colour images. Default 150. */
+    ColorImageDpi?: number;
+    /** Target DPI for grayscale images. Default 150. */
+    GrayImageDpi?: number;
+    /** Target DPI for monochrome (1-bit) images. Default 150. */
+    MonoImageDpi?: number;
+    /** Additional raw Ghostscript arguments. Optional. */
+    AdditionalArgs?: string | null;
+}
+
+/**
+ * Options for {@link PdfInstance.ApplyICCProfile}. All fields optional.
+ */
+interface PdfIccProfileOptions {
+    /** Output density in DPI. Default 300. */
+    Density?: number;
+    /** Output quality (1-100). Default 100. */
+    Quality?: number;
+    /** Target colour space, e.g. "CMYK". Default "CMYK". */
+    ColorSpace?: string;
+    /** Additional raw arguments. Optional. */
+    AdditionalArgs?: string | null;
+}
+
+/**
+ * Options for {@link PdfInstance.ConvertToColorSpace}. All fields optional.
+ */
+interface PdfColorSpaceConversionOptions {
+    /**
+     * Target Ghostscript device colour space:
+     * 0 = DeviceCMYK (default), 1 = DeviceRGB, 2 = DeviceGray, 3 = LeaveColorUnchanged.
+     */
+    DeviceSpace?: 0 | 1 | 2 | 3;
+    /** Additional raw Ghostscript arguments. Optional. */
+    AdditionalArgs?: string;
+}
+
+/**
+ * Options for {@link PdfInstance.Grayscale}. All fields optional.
+ */
+interface PdfSelectiveGrayscaleOptions {
+    /** Zero-based indices of pages to convert fully to grayscale. Default empty. */
+    GrayPages?: number[];
+    /** Zero-based indices of pages to grayscale on the left side. Default empty. */
+    LeftPages?: number[];
+    /** Zero-based indices of pages to grayscale on the right side. Default empty. */
+    RightPages?: number[];
+    /** Raster DPI used during selective grayscale processing. Default 300. */
+    RasterDpi?: number;
+}
+
+/**
+ * Options for {@link PdfInstance.RasterizeThumbnails} and {@link PdfInstance.RasterizeThumbnailPage}.
+ * All fields optional.
+ */
+interface PdfRasterizeOptions {
+    /** Output image width in pixels. Default 600. */
+    Width?: number;
+    /** Output image height in pixels. Optional; when null the height is derived from the width. */
+    Height?: number | null;
+    /** Background colour as an HTML hex string. Default "#FFFFFF". */
+    BackgroundColor?: string;
+    /** Output image format/extension, e.g. "jpg", "png", "tiff". Default "jpg". */
+    Format?: string;
+    /** Additional raw Ghostscript arguments. Optional. */
+    AdditionalArgs?: string;
 }

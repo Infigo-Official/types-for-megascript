@@ -56,6 +56,15 @@ interface MisPluginsObject {
        inputFiles: Object,
        parameters: Object
    ): MisExecuteActionResponseObject | null;
+
+   /**
+    * Retriggers MIS order creation for an existing order against a specific MIS plugin.
+    * The order lookup is account-scoped, so an order outside the current storefront cannot be retriggered.
+    * @param orderId - The identifier of the order to retrigger.
+    * @param pluginSystemName - The system name of the MIS plugin to retrigger against.
+    * @returns A result object; `Success` is `false` with error messages when the plugin name is missing, the order is not found, or the retrigger fails. `Id` carries the order ID.
+    */
+   RetriggerOrder(orderId: number, pluginSystemName: string): ResultObject;
 }
 
 /**

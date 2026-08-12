@@ -105,6 +105,27 @@ interface DynamicProduct {
     GetFieldDetails(fieldName: string): DynamicFieldModel;
 
     /**
+     * Stores a script-data value under the given key. The value is merged into the instance's script data before appearance preparation and impression.
+     * @param key - The script-data key (must be non-empty).
+     * @param value - The value to store (must not be null).
+     */
+    SetScriptData(key: string, value: any): void;
+
+    /**
+     * Retrieves a previously stored script-data value by key.
+     * @param key - The script-data key (must be non-empty).
+     * @returns The stored value as an object, or null if no value is stored for the key.
+     */
+    GetScriptData(key: string): Object | null;
+
+    /**
+     * Retrieves the names of the fields on the specified page.
+     * @param pageIndex - The index of the page to read field names from.
+     * @returns An array of field names, or null if the product is not loaded.
+     */
+    GetFieldsFromPage(pageIndex: number): string[] | null;
+
+    /**
      * Indicates whether the dynamic product is currently loaded.
      * This property is read-only.
      * @returns {boolean} True if the product is loaded, false otherwise.
