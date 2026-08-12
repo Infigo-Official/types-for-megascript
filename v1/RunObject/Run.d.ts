@@ -48,6 +48,11 @@ interface Run {
    Orders: Orders;
 
    /**
+    * Jobs (order products) accessible within the run.
+    */
+   Jobs: Jobs;
+
+   /**
     * Database operations within the run.
     */
    Database: Database;
