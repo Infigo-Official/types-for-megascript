@@ -42,6 +42,12 @@ interface DynamicProduct {
     PrepareAppearance(): boolean;
 
     /**
+     * Prepares the appearance of the dynamic product using default dimensions with verbose logging enabled.
+     * @returns {boolean} Returns true if the appearance was successfully prepared, false otherwise.
+     */
+    PrepareAppearanceVerbose(): boolean;
+
+    /**
      * Impresses the dynamic product onto a specified file.
      * This typically involves generating a file with the product's content.
      * @param fileInstance - The target file instance where the product will be impressed.

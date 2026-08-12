@@ -107,6 +107,16 @@ interface CustomDataSearchObject {
      * The query string to search for within the specified key or field.
      */
     Query: string;
+
+    /**
+     * The field or key to sort the search results by.
+     */
+    SortBy: string;
+
+    /**
+     * The sort direction to apply to the search results (e.g. "asc" or "desc").
+     */
+    SortDirection: string;
 }
 
 /**

@@ -19,6 +19,11 @@ interface CurrentContextObject {
     JobId: string;
 
     /**
+     * The ID of the product associated with the current job context, or -1 if none.
+     */
+    ProductId: number;
+
+    /**
      * Additional parameters or data associated with the current context.
      */
     Parameter: any;
@@ -42,6 +47,13 @@ interface CurrentContextObject {
      * The event object associated with the current context.
      */
     Event: EventObject;
+
+    /**
+     * Sets the execution result of the current context.
+     * @param isSuccess Whether the execution succeeded.
+     * @param message The message to associate with the result.
+     */
+    SetResult: (isSuccess: boolean, message: string) => void;
 
     /**
      * Retrieves the backup file instance of the current context.

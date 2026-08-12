@@ -115,11 +115,24 @@ interface FileInstance {
     LoadBinary: () => [];
 
     /**
+     * Loads the file's contents and returns them as a Base64-encoded string.
+     * @returns The Base64-encoded contents, or null if the file does not exist or cannot be read.
+     */
+    LoadBase64: () => string;
+
+    /**
      * Loads metadata from the file.
      * @param metaData Optional. The metadata to load.
      * @returns The loaded metadata instance.
      */
     LoadMetaData: (metaData?: MetaDataToLoad) => JobMetaDataInstanceObject;
+
+    /**
+     * Generates a short-lived, web-accessible copy of this file and returns its download URL.
+     * @param fileName The file name to expose the copy under.
+     * @returns The web-accessible URL, or null if the copy could not be created.
+     */
+    GenerateWebAccessibleCopy: (fileName: string) => string;
 
     /**
      * Creates a PDF from a dynamic template.

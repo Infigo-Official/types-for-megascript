@@ -136,6 +136,25 @@ interface PdfInstance {
     RemoveTransparencyGroups: () => boolean;
 
     /**
+     * Downsamples every image in the PDF by the given scale factor and saves the result.
+     * @param scaleFactor The factor by which to scale down the images.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    Downsample: (scaleFactor: number) => boolean;
+
+    /**
+     * Normalizes the rotation of every page in the PDF to 0°.
+     * @returns `true` if the operation is successful, otherwise `false`.
+     */
+    NormalizeRotation: () => boolean;
+
+    /**
+     * Clears the document metadata.
+     * @param customOnly When `true`, clears only custom metadata; otherwise clears all metadata.
+     */
+    ClearMetaData: (customOnly: boolean) => void;
+
+    /**
      * Gets the PDF/A conformance level of the PDF.
      */
     PdfaConformance: string;

@@ -202,6 +202,14 @@ interface Products {
     FindBySku: (sku: string) => Product;
 
     /**
+     * Determines whether a category with the given ID exists.
+     *
+     * @param categoryId - The ID of the category to check.
+     * @returns `true` if the category exists, otherwise `false`.
+     */
+    CategoryExists: (categoryId: number) => boolean;
+
+    /**
      * Finds products by their external identifier.
      *
      * @param externalId - The external identifier of the products.

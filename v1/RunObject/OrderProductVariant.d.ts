@@ -214,6 +214,12 @@ interface OrderProductVariant {
     ExtraData: { [key: string]: string };
 
     /**
+     * Gets the email address of the customer who placed the order for this item.
+     * @returns The customer's email address, or null if the item cannot be found.
+     */
+    GetCustomerEmail: () => string;
+
+    /**
      * Retrieves the output file associated with the order product variant.
      * @returns The output file instance.
      */
